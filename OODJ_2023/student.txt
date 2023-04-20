@@ -1,0 +1,2 @@
+ks;321;kahshen;121;Penang;Male;320.0
+yk;123;yuki;101;johor;Female;850.0
