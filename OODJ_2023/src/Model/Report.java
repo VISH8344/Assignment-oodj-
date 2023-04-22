@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Model.Enum.RoomType;
 import java.time.LocalDateTime;
 
 /**

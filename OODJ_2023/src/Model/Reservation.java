@@ -4,7 +4,7 @@ package Model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Booked_room {
+public class Reservation {
     
     private int bookingID;
     private double totalPrice;
@@ -13,7 +13,7 @@ public class Booked_room {
     private int roomNumber;
     private int contractPeriod;
     
-    public Booked_room(int bookingID, double totalPrice, String bookingDate, String student_username, int roomNumber, int contractPeriod) {
+    public Reservation(int bookingID, double totalPrice, String bookingDate, String student_username, int roomNumber, int contractPeriod) {
         this.bookingID = bookingID;
         this.totalPrice = totalPrice;
         this.bookingDate = bookingDate;

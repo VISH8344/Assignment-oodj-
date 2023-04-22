@@ -1,8 +1,8 @@
 package UI;
 
-import Model.Booked_room;
+import Model.Reservation;
 import Model.Room;
-import Model.RoomType;
+import Model.Enum.RoomType;
 import Student.Booking_DataIO;
 import static Student.Booking_DataIO.booked_array;
 import Student.Room_DataIO;
@@ -289,7 +289,7 @@ public class BookingPage extends javax.swing.JFrame {
             String booking_date = dateformat.format(date);
 
             String student_uname = oodj_2023.OODJ_2023.studentlogin.getUsername();
-            Booked_room found = Booking_DataIO.checkStudentBooking(student_uname);
+            Reservation found = Booking_DataIO.checkStudentBooking(student_uname);
 
             int room_no = room.getRoomNumber();
             if (found == null) {
@@ -308,7 +308,7 @@ public class BookingPage extends javax.swing.JFrame {
                             room.setRoom_available();
                             Room_DataIO.write();
 
-                            Booking_DataIO.booked_array.add(new Booked_room(bookingID, room_price, booking_date,
+                            Booking_DataIO.booked_array.add(new Reservation(bookingID, room_price, booking_date,
                                     student_uname, room_no, contract_time));
                             Booking_DataIO.write();
 

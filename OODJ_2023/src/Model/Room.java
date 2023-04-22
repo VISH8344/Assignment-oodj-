@@ -1,4 +1,7 @@
 package Model;
+
+import Model.Enum.RoomType;
+
 public abstract class Room {
     private int roomNumber;
     private int capacity;

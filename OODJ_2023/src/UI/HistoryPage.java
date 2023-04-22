@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Model.Booked_room;
+import Model.Reservation;
 import Model.Room;
 import Student.Booking_DataIO;
 import Student.Room_DataIO;
@@ -50,7 +50,7 @@ public class HistoryPage extends javax.swing.JFrame {
         Object[][] data = new Object[Booking_DataIO.checkStudentBookings(OODJ_2023.studentlogin.getUsername()).size()][5];
 
         for (int i = 0; i < Booking_DataIO.checkStudentBookings(OODJ_2023.studentlogin.getUsername()).size(); i++) {
-            Booked_room br = Booking_DataIO.checkStudentBookings(OODJ_2023.studentlogin.getUsername()).get(i);
+            Reservation br = Booking_DataIO.checkStudentBookings(OODJ_2023.studentlogin.getUsername()).get(i);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             String end_date = formatter.format(br.get_contract_end_date());
 
@@ -238,7 +238,7 @@ public class HistoryPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(jPanel1,
                         "The minimum extend period is 1 year.");
             } else {
-                Booked_room br = Booking_DataIO.checkStudentBooking(OODJ_2023.studentlogin.getUsername());
+                Reservation br = Booking_DataIO.checkStudentBooking(OODJ_2023.studentlogin.getUsername());
                 if (br != null) {
                     double balance = OODJ_2023.studentlogin.getBalance();
                     Room room = Room_DataIO.checkRoom(br.getRoomNumber());

@@ -2,7 +2,7 @@
 package Model.subclass_room;
 
 import Model.Room;
-import Model.RoomType;
+import Model.Enum.RoomType;
 
 public class Premium_twin_room extends Room {
 

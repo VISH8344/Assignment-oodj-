@@ -11,16 +11,28 @@ import java.time.LocalDate;
  * @author mingl
  */
 public class Payment {
+    private int paymentID;
     private Student student;
-    private boolean  isRefunded;
+    private HostelRoom room;
     private double amount;
     private LocalDate dateTime;
+    private boolean  isRefunded;
 
-    public Payment(Student student, boolean isRefunded, double amount, LocalDate dateTime) {
+    public Payment(int paymentID, Student student, HostelRoom room, double amount, LocalDate dateTime, boolean isRefunded) {
+        this.paymentID = paymentID;
         this.student = student;
-        this.isRefunded = isRefunded;
+        this.room = room;
         this.amount = amount;
         this.dateTime = dateTime;
+        this.isRefunded = isRefunded;
+    }
+
+    public int getPaymentID() {
+        return paymentID;
+    }
+
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
     }
 
     public Student getStudent() {
@@ -31,12 +43,12 @@ public class Payment {
         this.student = student;
     }
 
-    public boolean isIsRefunded() {
-        return isRefunded;
+    public HostelRoom getRoom() {
+        return room;
     }
 
-    public void setIsRefunded(boolean isRefunded) {
-        this.isRefunded = isRefunded;
+    public void setRoom(HostelRoom room) {
+        this.room = room;
     }
 
     public double getAmount() {
@@ -54,4 +66,14 @@ public class Payment {
     public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
+
+    public boolean isIsRefunded() {
+        return isRefunded;
+    }
+
+    public void setIsRefunded(boolean isRefunded) {
+        this.isRefunded = isRefunded;
+    }
+
+    
 }
