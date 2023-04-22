@@ -5,12 +5,13 @@
 package Model;
 
 import Model.Enum.RoomType;
+import java.io.Serializable;
 
 /**
  *
  * @author mingl
  */
-public class HostelRoom {
+public class HostelRoom implements Serializable {
 
     private int roomID;
     private RoomType roomType;

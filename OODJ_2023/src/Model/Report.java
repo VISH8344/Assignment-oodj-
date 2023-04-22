@@ -5,13 +5,14 @@
 package Model;
 
 import Model.Enum.RoomType;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author mingl
  */
-public class Report {
+public class Report implements Serializable {
     private Student student;
     private RoomType roomType;
     private int roomNumber;

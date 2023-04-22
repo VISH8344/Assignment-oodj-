@@ -1,10 +1,11 @@
 
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Reservation {
+public class Reservation implements Serializable{
     
     private int bookingID;
     private double totalPrice;

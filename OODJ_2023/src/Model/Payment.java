@@ -4,13 +4,14 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author mingl
  */
-public class Payment {
+public class Payment implements Serializable{
     private int paymentID;
     private Student student;
     private HostelRoom room;

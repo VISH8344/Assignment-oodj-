@@ -4,11 +4,13 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mingl
  */
-public class Admin  extends User{
+public class Admin  extends User implements Serializable{
     Admin(String username, String password){
         super(username, password);
     }
