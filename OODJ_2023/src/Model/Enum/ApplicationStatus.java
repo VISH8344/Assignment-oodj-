@@ -6,10 +6,9 @@ package Model.Enum;
 
 /**
  *
- * @author mingl
  */
 public enum ApplicationStatus {
-    NONE,
+    PENDING,
     APPROVED,
     REJECTED
 }

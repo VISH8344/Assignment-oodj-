@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author mingl
  */
 public class ApplicationController {
         ArrayList<Application> applications = new ArrayList<Application>();

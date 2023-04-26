@@ -9,17 +9,8 @@ import java.io.IOException;
 
 /**
  *
- * @author mingl
  */
 public class FileUtil {
-
-    public static boolean createDirectory(String directoryPath) {
-        File directory = new File(directoryPath);
-        if (!directory.exists()) {
-            return directory.mkdirs();
-        }
-        return true;
-    }
 
     public static boolean createFile(String filePath) {
         File file = new File(filePath);

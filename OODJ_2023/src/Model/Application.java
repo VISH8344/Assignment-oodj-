@@ -7,24 +7,23 @@ package Model;
 import Model.Enum.ApplicationStatus;
 import Model.Payment;
 import Model.Student;
-import java.time.LocalDate;
 import java.io.*;
+import java.time.LocalDateTime;
 
 /**
  *
- * @author mingl
  */
 public class Application implements Serializable {
 
     private int applicationID;
     private Student student;
     private HostelRoom room;
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
     private Payment payment;
     private ApplicationStatus applicationStatus;
     private String rejectedReason;
 
-    public Application(int applicationID, Student student, HostelRoom room, LocalDate dateTime, Payment payment, ApplicationStatus applicationStatus, String rejectedReason) {
+    public Application(int applicationID, Student student, HostelRoom room, LocalDateTime dateTime, Payment payment, ApplicationStatus applicationStatus, String rejectedReason) {
         this.applicationID = applicationID;
         this.student = student;
         this.room = room;
@@ -58,11 +57,11 @@ public class Application implements Serializable {
         this.room = room;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDate dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -90,4 +89,9 @@ public class Application implements Serializable {
         this.rejectedReason = rejectedReason;
     }
 
+    @Override
+    public String toString() {
+        return "Application{" + "applicationID=" + applicationID + ", student=" + student + ", room=" + room + ", dateTime=" + dateTime + ", payment=" + payment + ", applicationStatus=" + applicationStatus + ", rejectedReason=" + rejectedReason + '}';
+    }
+    
 }

@@ -4,12 +4,13 @@
  */
 package Model;
 
+import Model.Enum.Facility;
 import Model.Enum.RoomType;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
- * @author mingl
  */
 public class HostelRoom implements Serializable {
 
@@ -17,12 +18,16 @@ public class HostelRoom implements Serializable {
     private RoomType roomType;
     private double roomPrice;
     private boolean isAvailable;
-
-    public HostelRoom(int roomID, RoomType roomType, double roomPrice, boolean isAvailable) {
+    private int capacity;    
+    private ArrayList<Facility> facilities;
+    
+    public HostelRoom(int roomID, RoomType roomType, double roomPrice, boolean isAvailable, int capacity, ArrayList<Facility> facilities) {
         this.roomID = roomID;
         this.roomType = roomType;
         this.roomPrice = roomPrice;
         this.isAvailable = isAvailable;
+        this.capacity = capacity;
+        this.facilities = facilities;
     }
 
     public int getRoomID() {
@@ -56,6 +61,21 @@ public class HostelRoom implements Serializable {
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
-    
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public ArrayList<Facility> getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(ArrayList<Facility> facilities) {
+        this.facilities = facilities;
+    }
     
 }

@@ -5,21 +5,20 @@
 package Model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
- * @author mingl
  */
 public class Payment implements Serializable{
     private int paymentID;
     private Student student;
     private HostelRoom room;
     private double amount;
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
     private boolean  isRefunded;
 
-    public Payment(int paymentID, Student student, HostelRoom room, double amount, LocalDate dateTime, boolean isRefunded) {
+    public Payment(int paymentID, Student student, HostelRoom room, double amount, LocalDateTime dateTime, boolean isRefunded) {
         this.paymentID = paymentID;
         this.student = student;
         this.room = room;
@@ -60,11 +59,11 @@ public class Payment implements Serializable{
         this.amount = amount;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDate dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 

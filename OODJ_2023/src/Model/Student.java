@@ -59,4 +59,9 @@ public class Student extends User implements Serializable{
         this.balance = balance;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" + "name=" + name + ", NIC=" + NIC + ", address=" + address + ", gender=" + gender + ", balance=" + balance + '}';
+    }
+    
 }

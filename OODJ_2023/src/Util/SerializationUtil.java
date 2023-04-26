@@ -4,6 +4,7 @@
  */
 package Util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import java.io.ObjectOutputStream;
 
 /**
  *
- * @author mingl
  */
 public class SerializationUtil {
 
@@ -32,8 +32,13 @@ public class SerializationUtil {
 
     // serialize the object and save it to file
     public static boolean writeObjectToFile(Object object, String fileName) {
+        String filePath = "data/" + fileName;
+        boolean isFileExist = new File(filePath).isFile();
+        if(!isFileExist){
+            FileUtil.createFile(filePath);
+        }
         try (
-                FileOutputStream fileOutputStream = new FileOutputStream(fileName); 
+                FileOutputStream fileOutputStream = new FileOutputStream(filePath); 
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
             )
         {

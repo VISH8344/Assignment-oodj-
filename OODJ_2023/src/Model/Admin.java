@@ -8,10 +8,15 @@ import java.io.Serializable;
 
 /**
  *
- * @author mingl
  */
 public class Admin  extends User implements Serializable{
-    Admin(String username, String password){
+    public Admin(String username, String password){
         super(username, password);
+    }
+
+    // TO BE DELETED (Testing purpose)
+    @Override
+    public String toString() {
+        return "Admin{" + super.getUsername() + " : " + super.getPassword() + '}';
     }
 }

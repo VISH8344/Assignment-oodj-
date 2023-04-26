@@ -1,6 +1,6 @@
 package Student;
 
-import Model.Reservation;
+import Model.Booking;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Booking_DataIO {
 
-    public static ArrayList<Reservation> booked_array = new ArrayList<Reservation>();
+    public static ArrayList<Booking> booked_array = new ArrayList<Booking>();
 
     public static void read() {
         try {
@@ -30,7 +30,7 @@ public class Booking_DataIO {
                 int room_no = Integer.parseInt(data[4]);
                 int contractPeriod = Integer.parseInt(data[5]);
 
-                booked_array.add(new Reservation(bookingID, totalPrice, bookingDate, student_uname, room_no, contractPeriod));
+                booked_array.add(new Booking(bookingID, totalPrice, bookingDate, student_uname, room_no, contractPeriod));
             }
         } catch (Exception e) {
             System.out.println("read error in booking");
@@ -42,7 +42,7 @@ public class Booking_DataIO {
         try {
             BufferedWriter bw = new BufferedWriter(new PrintWriter("booked_room.txt"));
             for (int i = 0; i < booked_array.size(); i++) {
-                Reservation book_r = booked_array.get(i);
+                Booking book_r = booked_array.get(i);
                 bw.write(book_r.getBookingID() + ";"
                         + book_r.getTotalPrice() + ";"
                         + book_r.getBookingDate() + ";"
@@ -60,11 +60,11 @@ public class Booking_DataIO {
 
 
 
-    public static Reservation checkStudentBooking(String student_username) {
-        Reservation found = null;
+    public static Booking checkStudentBooking(String student_username) {
+        Booking found = null;
         LocalDate currentDate = LocalDate.now();
         for (int i = 0; i < booked_array.size(); i++) {
-            Reservation s = booked_array.get(i);
+            Booking s = booked_array.get(i);
             LocalDate contractEndDate = s.get_contract_end_date();
             if (student_username.equals(s.getStudent_username())) {
                 if (currentDate.isBefore(contractEndDate)) {
@@ -76,10 +76,10 @@ public class Booking_DataIO {
         return found;
     }
 
-    public static ArrayList<Reservation> checkStudentBookings(String student_username) {
-        ArrayList<Reservation> student_book_his = new ArrayList<Reservation>();
+    public static ArrayList<Booking> checkStudentBookings(String student_username) {
+        ArrayList<Booking> student_book_his = new ArrayList<Booking>();
         for (int i = 0; i < booked_array.size(); i++) {
-            Reservation br = booked_array.get(i);
+            Booking br = booked_array.get(i);
             if (student_username.equals(br.getStudent_username())) {
                 student_book_his.add(br);
             }
@@ -90,7 +90,7 @@ public class Booking_DataIO {
     public static int get_last_bookingID() {
         int bookingID = 0;
         for (int i = 0; i < booked_array.size(); i++) {
-            Reservation br = booked_array.get(i);
+            Booking br = booked_array.get(i);
             bookingID = br.getBookingID();
         }
         return bookingID;

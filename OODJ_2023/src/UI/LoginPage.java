@@ -4,6 +4,8 @@
  */
 package UI;
 
+import UI.Student.MainPage;
+import Model.Enum.UserRole;
 import Model.Student;
 import Student.Booking_DataIO;
 import Student.Student_DataIO;
@@ -20,8 +22,10 @@ public class LoginPage extends javax.swing.JFrame {
     /**
      * Creates new form LoginPage
      */
-    public LoginPage() {
+    public LoginPage(UserRole role) {
         initComponents();
+        String roleName = role.name().substring(0, 1).toUpperCase() + role.name().substring(1).toLowerCase();
+        loginTitle.setText(roleName + " Login");
         Booking_DataIO.read();
     }
 
@@ -35,13 +39,13 @@ public class LoginPage extends javax.swing.JFrame {
     private void initComponents() {
 
         loginpage = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        loginTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         uname_field = new javax.swing.JTextField();
         pass_field = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         register_btn = new javax.swing.JButton();
 
@@ -49,7 +53,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         loginpage.setBackground(new java.awt.Color(102, 255, 255));
 
-        jLabel1.setText("Student Login");
+        loginTitle.setText("Student Login");
 
         jLabel2.setText("username:");
 
@@ -61,12 +65,12 @@ public class LoginPage extends javax.swing.JFrame {
 
         jLabel3.setText("password:");
 
-        jButton2.setText("back");
+        backBtn.setText("back");
 
-        jButton1.setText("login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setText("login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
 
@@ -86,7 +90,7 @@ public class LoginPage extends javax.swing.JFrame {
             .addGroup(loginpageLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
+                    .addComponent(backBtn)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGroup(loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +102,7 @@ public class LoginPage extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(loginpageLayout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jButton1)
+                        .addComponent(loginBtn)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(loginpageLayout.createSequentialGroup()
                 .addGroup(loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,14 +113,14 @@ public class LoginPage extends javax.swing.JFrame {
                         .addComponent(register_btn))
                     .addGroup(loginpageLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addComponent(jLabel1)))
+                        .addComponent(loginTitle)))
                 .addGap(0, 64, Short.MAX_VALUE))
         );
         loginpageLayout.setVerticalGroup(
             loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginpageLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addComponent(loginTitle)
                 .addGap(27, 27, 27)
                 .addGroup(loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -127,8 +131,8 @@ public class LoginPage extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(27, 27, 27)
                 .addGroup(loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(backBtn)
+                    .addComponent(loginBtn))
                 .addGap(31, 31, 31)
                 .addGroup(loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -161,7 +165,7 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_uname_fieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         try{
         String student_uname = uname_field.getText();
         String student_pass = pass_field.getText();
@@ -173,7 +177,7 @@ public class LoginPage extends javax.swing.JFrame {
 
             } else {
                 if (found != null && student_pass.equals(found.getPassword())) {
-                    OODJ_2023.studentlogin = found;
+//                    OODJ_2023.studentlogin = found;
                     JOptionPane.showMessageDialog(loginpage,"Login Successful!");
                     uname_field.setText("");
                     pass_field.setText("");
@@ -189,7 +193,7 @@ public class LoginPage extends javax.swing.JFrame {
                     "Please ensure that you have entered your username and password correctly.");
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
         rp.setVisible(true);
@@ -199,12 +203,12 @@ public class LoginPage extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JLabel loginTitle;
     private javax.swing.JPanel loginpage;
     private javax.swing.JPasswordField pass_field;
     private javax.swing.JButton register_btn;

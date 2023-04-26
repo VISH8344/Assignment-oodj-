@@ -1,81 +1,72 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
+/**
+ *
+ * @author mingl
+ */
 public class Reservation implements Serializable{
-    
-    private int bookingID;
-    private double totalPrice;
-    private String bookingDate;
-    private String student_username;
-    private int roomNumber;
-    private int contractPeriod;
-    
-    public Reservation(int bookingID, double totalPrice, String bookingDate, String student_username, int roomNumber, int contractPeriod) {
-        this.bookingID = bookingID;
-        this.totalPrice = totalPrice;
-        this.bookingDate = bookingDate;
-        this.student_username = student_username;
-        this.roomNumber = roomNumber;
-        this.contractPeriod = contractPeriod;
+
+    private int reservationID;
+    private Application application; // for student and room information
+    private LocalDateTime checkInDateTime;
+    private LocalDateTime checkOutDateTime;
+    private int contractPeriodWeeks; //how many weeks
+
+    public Reservation(int reservationID, Application application, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime, int contractPeriod) {
+        this.reservationID = reservationID;
+        this.application = application;
+        this.checkInDateTime = checkInDateTime;
+        this.checkOutDateTime = checkOutDateTime;
+        this.contractPeriodWeeks = contractPeriodWeeks;
     }
 
-    public int getBookingID() {
-        return bookingID;
+    public int getReservationID() {
+        return reservationID;
     }
 
-    public void setBookingID(int bookingID) {
-        this.bookingID = bookingID;
+    public void setReservationID(int reservationID) {
+        this.reservationID = reservationID;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public Application getApplication() {
+        return application;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setApplication(Application application) {
+        this.application = application;
     }
 
-    public String getBookingDate() {
-        return bookingDate;
+    public LocalDateTime getCheckInDateTime() {
+        return checkInDateTime;
     }
 
-    public void setBookingDate(String bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setCheckInDateTime(LocalDateTime checkInDateTime) {
+        this.checkInDateTime = checkInDateTime;
     }
 
-    public String getStudent_username() {
-        return student_username;
+    public LocalDateTime getCheckOutDateTime() {
+        return checkOutDateTime;
     }
 
-    public void setStudent_username(String student_username) {
-        this.student_username = student_username;
+    public void setCheckOutDateTime(LocalDateTime checkOutDateTime) {
+        this.checkOutDateTime = checkOutDateTime;
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
+    public int getcontractPeriodWeeks() {
+        return contractPeriodWeeks;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setcontractPeriodWeeks(int contractPeriodWeeks) {
+        this.contractPeriodWeeks = contractPeriodWeeks;
     }
 
-    public int getContractPeriod() {
-        return contractPeriod;
-    }
+        
 
-    public void setContractPeriod(int contractPeriod) {
-        this.contractPeriod = contractPeriod;
-    }
-    
-    public LocalDate get_contract_end_date() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        LocalDate startDate = LocalDate.parse(bookingDate, formatter);
-        LocalDate endDate = startDate.plusMonths(contractPeriod);
-        return endDate;
-    }
-    
 }

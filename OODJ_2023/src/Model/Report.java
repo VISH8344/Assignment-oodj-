@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author mingl
  */
 public class Report implements Serializable {
     private Student student;
