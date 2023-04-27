@@ -8,8 +8,10 @@ import Model.Admin;
 import Model.Application;
 import Model.Enum.ApplicationStatus;
 import Model.Enum.Facility;
-import Model.Enum.RoomType;
 import Model.HostelRoom;
+import Model.HostelSubClass.PremiumSingleRoom;
+import Model.HostelSubClass.SingleRoom;
+import Model.HostelSubClass.TwinRoom;
 import Model.Payment;
 import Model.Reservation;
 import Model.Student;
@@ -27,6 +29,9 @@ public class Config_Setup_Data {
     private Student student;
     private ArrayList<Facility> facilities = new ArrayList<>();
     private HostelRoom room;
+    private HostelRoom room2;
+    private HostelRoom room3;
+    private HostelRoom room4;
     private Application application;
     private Application application2;
     private Reservation reservation;
@@ -43,8 +48,15 @@ public class Config_Setup_Data {
     public void TempHostelData() {
         facilities.add(Facility.KITCHEN);
         facilities.add(Facility.AIRCOND);
-         room = new HostelRoom(1, RoomType.SINGLE, 700.0, true, 1, facilities);
+         room = new SingleRoom(1, true, 1, facilities);
+         room2 = new SingleRoom(2, true, 1, facilities);
+         room3 = new TwinRoom(3, true, 2, facilities);
+         room4 = new PremiumSingleRoom(4, true, 1, facilities);
+         
         SerializationUtil.writeObjectToFile(room, FileName.ROOM);
+        SerializationUtil.writeObjectToFile(room2, FileName.ROOM);
+        SerializationUtil.writeObjectToFile(room3, FileName.ROOM);
+        SerializationUtil.writeObjectToFile(room4, FileName.ROOM);
     }
 
     public void TempApplicationData() {
@@ -69,7 +81,9 @@ public class Config_Setup_Data {
     
     public static void InitializeData(){
         // // add temp data
-        if(!new File("/Path/To/File/or/Directory").exists()){
+        File folder = new File("data");
+        if(!folder.exists() && !folder.isDirectory()){
+            folder.mkdirs();
             Config_Setup_Data config = new Config_Setup_Data();
             config.TempUserData();
             config.TempHostelData();

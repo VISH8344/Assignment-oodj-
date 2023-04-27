@@ -1,5 +1,5 @@
 
-package Model.subclass_room;
+package Model.subclass_room_old;
 
 import Model.Room;
 import Model.Enum.RoomType;

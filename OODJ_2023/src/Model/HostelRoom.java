@@ -5,7 +5,6 @@
 package Model;
 
 import Model.Enum.Facility;
-import Model.Enum.RoomType;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -15,16 +14,13 @@ import java.util.ArrayList;
 public class HostelRoom implements Serializable {
 
     private int roomID;
-    private RoomType roomType;
-    private double roomPrice;
+//    private RoomType roomType; //subclass attribute
     private boolean isAvailable;
     private int capacity;    
     private ArrayList<Facility> facilities;
     
-    public HostelRoom(int roomID, RoomType roomType, double roomPrice, boolean isAvailable, int capacity, ArrayList<Facility> facilities) {
+    public HostelRoom(int roomID, boolean isAvailable, int capacity, ArrayList<Facility> facilities) {
         this.roomID = roomID;
-        this.roomType = roomType;
-        this.roomPrice = roomPrice;
         this.isAvailable = isAvailable;
         this.capacity = capacity;
         this.facilities = facilities;
@@ -38,23 +34,7 @@ public class HostelRoom implements Serializable {
         this.roomID = roomID;
     }
 
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
-    }
-
-    public double getRoomPrice() {
-        return roomPrice;
-    }
-
-    public void setRoomPrice(double roomPrice) {
-        this.roomPrice = roomPrice;
-    }
-
-    public boolean isIsAvailable() {
+    public boolean isAvailable() {
         return isAvailable;
     }
 
@@ -77,5 +57,4 @@ public class HostelRoom implements Serializable {
     public void setFacilities(ArrayList<Facility> facilities) {
         this.facilities = facilities;
     }
-    
 }

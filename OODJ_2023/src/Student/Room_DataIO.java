@@ -2,10 +2,10 @@ package Student;
 
 import Model.Room;
 import Model.Enum.RoomType;
-import Model.subclass_room.Premium_single_room;
-import Model.subclass_room.Premium_twin_room;
-import Model.subclass_room.Single_room;
-import Model.subclass_room.Twin_room;
+import Model.subclass_room_old.Premium_single_room;
+import Model.subclass_room_old.Premium_twin_room;
+import Model.subclass_room_old.Single_room;
+import Model.subclass_room_old.Twin_room;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
