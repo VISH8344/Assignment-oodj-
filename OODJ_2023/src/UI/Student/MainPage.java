@@ -26,7 +26,7 @@ public class MainPage extends javax.swing.JFrame {
     jLabel3.setText(oodj_2023.OODJ_2023.student.getName());
     jLabel10.setText(oodj_2023.OODJ_2023.student.getUsername());
     jLabel11.setText(oodj_2023.OODJ_2023.student.getName());
-    jLabel12.setText(Integer.toString(oodj_2023.OODJ_2023.student.getNIC()));
+    jLabel12.setText(oodj_2023.OODJ_2023.student.getNIC());
     jLabel13.setText(oodj_2023.OODJ_2023.student.getAddress());
     jLabel14.setText(oodj_2023.OODJ_2023.student.getGender());
     jLabel16.setText(Double.toString(oodj_2023.OODJ_2023.student.getBalance()));

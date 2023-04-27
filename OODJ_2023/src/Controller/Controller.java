@@ -4,13 +4,12 @@
  */
 package Controller;
 
-import Model.Admin;
-import Model.Student;
-import java.util.ArrayList;
-import java.util.stream.*;
+
 /**
  *
+ * @author mingl
  */
-public class UserController {
-    ArrayList<Admin> admins = new ArrayList<Admin>();
+interface Controller {
+    int getNewID();
+    void saveRecords();
 }

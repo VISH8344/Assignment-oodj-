@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Controller.StudentController;
 import Model.Student;
 import Student.Student_DataIO;
 import javax.swing.*;
@@ -255,7 +256,7 @@ public class RegisterPage extends javax.swing.JFrame {
         try {
             String student_uname = uname_field.getText();
             String student_pass = pass_field.getText();
-            int student_ic = Integer.parseInt(ic_tfield.getText());
+            String student_ic = ic_tfield.getText();
             String student_name = name_tfield.getText();
             String student_address = address_tfield.getText();
             String student_gender = getGender();
@@ -267,8 +268,8 @@ public class RegisterPage extends javax.swing.JFrame {
             } else {
                 Student found = Student_DataIO.checkusername(student_uname);
                 if (found == null) {
-                    Student_DataIO.stu.add(new Student(student_uname, student_pass, student_name,
-                            student_ic, student_address, student_gender, student_balance));
+                    int newStudentID = StudentController.ActivateStudentController().getNewID();
+                    Student_DataIO.stu.add(new Student(newStudentID, student_name, student_ic, student_address, student_gender, student_balance, student_uname, student_pass));
                     Student_DataIO.write();
                     JOptionPane.showMessageDialog(registerpage,
                             "You're registered!");

@@ -46,7 +46,7 @@ public class EditPage extends javax.swing.JFrame {
         uname_field.setText(OODJ_2023.student.getUsername());
         uname_field.setEditable(false);
         name_tfield.setText(OODJ_2023.student.getName());
-        ic_tfield.setText(Integer.toString(OODJ_2023.student.getNIC()));
+        ic_tfield.setText(OODJ_2023.student.getNIC());
         pass_field.setText(OODJ_2023.student.getPassword());
         address_tfield.setText(OODJ_2023.student.getAddress());
         showGender();
@@ -289,7 +289,7 @@ public class EditPage extends javax.swing.JFrame {
 
                     OODJ_2023.student.setPassword(student_pass);
                     OODJ_2023.student.setName(student_name);
-                    OODJ_2023.student.setNIC(student_ic);
+                    OODJ_2023.student.setNIC(Integer.toString(student_ic));
                     OODJ_2023.student.setAddress(student_address);
                     OODJ_2023.student.setGender(student_gender);
 

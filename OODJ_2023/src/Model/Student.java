@@ -3,15 +3,16 @@ package Model;
 import java.io.Serializable;
 
 public class Student extends User implements Serializable{
-
+    private int studentID;
     private String name;
-    private int NIC;
+    private String NIC;
     private String address;
     private String gender;
     private double balance;
 
-    public Student(String username, String password, String name, int NIC, String address, String gender, double balance) {
+    public Student(int studentID, String name, String NIC, String address, String gender, double balance, String username, String password) {
         super(username, password);
+        this.studentID = studentID;
         this.name = name;
         this.NIC = NIC;
         this.address = address;
@@ -19,40 +20,48 @@ public class Student extends User implements Serializable{
         this.balance = balance;
     }
 
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+
     public String getName() {
         return name;
-    }
-
-    public int getNIC() {
-        return NIC;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public double getBalance() {
-        return balance;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setNIC(int NIC) {
+    public String getNIC() {
+        return NIC;
+    }
+
+    public void setNIC(String NIC) {
         this.NIC = NIC;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     public void setBalance(double balance) {

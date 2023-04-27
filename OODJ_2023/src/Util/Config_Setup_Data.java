@@ -40,7 +40,7 @@ public class Config_Setup_Data {
 
     public void TempUserData() {
         admin = new Admin("admin", "123");
-        student = new Student("student", "123", "Cindy", 1, "jalan 2, taman halo", "female", 100.0);
+        student = new Student(1, "Cindy", "0211221122", "3, Jalan Jagong, Taman Bunga", "FEMALE", 1000.0,"cindy223","123");
         SerializationUtil.writeObjectToFile(admin, FileName.ADMIN);
         SerializationUtil.writeObjectToFile(student, FileName.STUDENT);
     }

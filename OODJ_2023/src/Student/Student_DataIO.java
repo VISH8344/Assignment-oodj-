@@ -24,7 +24,7 @@ public class Student_DataIO {
                 String address = data[4];
                 String gender = data[5];
                 double balance = Double.parseDouble(data[6]);
-                stu.add(new Student(username,pass,name,IC,address,gender,balance));
+//                stu.add(new Student(username,pass,name,IC,address,gender,balance ));
             }
 
         } catch (IOException e) {
