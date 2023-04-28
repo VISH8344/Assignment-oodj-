@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
-import Model.Enum.RoomType;
 import Model.HostelRoom;
 import Model.HostelSubClass.PremiumSingleRoom;
 import Model.HostelSubClass.PremiumTwinRoom;
@@ -15,9 +10,6 @@ import Util.SerializationUtil;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-/**
- *
- */
 public class HostelRoomController implements Controller {
 
     ArrayList<HostelRoom> rooms;
@@ -100,16 +92,16 @@ public class HostelRoomController implements Controller {
     }
     
 // // Testing
-    public static void main(String[] args) {
-        HostelRoomController rc = roomController.ActivateHostelRoomController();
-        
-//        rc.getHostelRooms().forEach(room -> {
-//            System.out.println(room.getRoomID());
+//    public static void main(String[] args) {
+//        HostelRoomController rc = roomController.ActivateHostelRoomController();
+//        
+////        rc.getHostelRooms().forEach(room -> {
+////            System.out.println(room.getRoomID());
+////        });
+//        
+//        rc.getSingleRooms().forEach(room -> {
+//            System.out.println(room.getType());
+//            System.out.println(room.toString());
 //        });
-        
-        rc.getSingleRooms().forEach(room -> {
-            System.out.println(room.getType());
-            System.out.println(room.toString());
-        });
-    }
+//    }
 }

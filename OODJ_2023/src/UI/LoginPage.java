@@ -79,7 +79,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("No Account? Register Here!");
+        jLabel4.setText("Register student account");
 
         register_btn.setText("Register");
         register_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +119,7 @@ public class LoginPage extends javax.swing.JFrame {
                     .addGroup(loginpageLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(loginTitle)))
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addGap(0, 85, Short.MAX_VALUE))
         );
         loginpageLayout.setVerticalGroup(
             loginpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,19 +171,19 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_uname_fieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        try{
-        String student_uname = uname_field.getText();
-        String student_pass = pass_field.getText();
-        
-        Student found = Student_DataIO.checkusername(student_uname);
-        
-        if (student_uname.isEmpty() || student_pass.isEmpty()) {
+        try {
+            String student_uname = uname_field.getText();
+            String student_pass = pass_field.getText();
+
+            Student found = Student_DataIO.checkusername(student_uname);
+
+            if (student_uname.isEmpty() || student_pass.isEmpty()) {
                 throw new Exception();
 
             } else {
                 if (found != null && student_pass.equals(found.getPassword())) {
 //                    OODJ_2023.studentlogin = found;
-                    JOptionPane.showMessageDialog(loginpage,"Login Successful!");
+                    JOptionPane.showMessageDialog(loginpage, "Login Successful!");
                     uname_field.setText("");
                     pass_field.setText("");
                     this.setVisible(false);
@@ -193,7 +193,7 @@ public class LoginPage extends javax.swing.JFrame {
                     throw new Exception();
                 }
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(loginpage,
                     "Please ensure that you have entered your username and password correctly.");
 
@@ -201,17 +201,16 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
+        this.setVisible(false);
         RegisterPage rp = new RegisterPage();
         rp.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_register_btnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        OODJ_2023.wp.setVisible(true);
         this.setVisible(false);
+        OODJ_2023.wp.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;

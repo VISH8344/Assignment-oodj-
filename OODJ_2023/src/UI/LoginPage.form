@@ -89,7 +89,7 @@
                           <Component id="loginTitle" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="85" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -164,7 +164,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="No Account? Register Here!"/>
+            <Property name="text" type="java.lang.String" value="Register student account"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="register_btn">

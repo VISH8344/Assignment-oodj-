@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Enum.UserRole;
 import java.io.Serializable;
 
 public class Student extends User implements Serializable{
@@ -9,6 +10,7 @@ public class Student extends User implements Serializable{
     private String address;
     private String gender;
     private double balance;
+    private UserRole u_role = UserRole.STUDENT;
 
     public Student(int studentID, String name, String NIC, String address, String gender, double balance, String username, String password) {
         super(username, password);
@@ -66,6 +68,10 @@ public class Student extends User implements Serializable{
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+    
+    public UserRole getUserRole(){
+        return this.u_role;
     }
 
     @Override

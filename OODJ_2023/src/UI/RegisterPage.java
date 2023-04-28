@@ -8,6 +8,7 @@ import Controller.StudentController;
 import Model.Student;
 import Student.Student_DataIO;
 import javax.swing.*;
+import oodj_2023.OODJ_2023;
 import static oodj_2023.OODJ_2023.lp;
 
 /**
@@ -62,7 +63,7 @@ public class RegisterPage extends javax.swing.JFrame {
         name_tfield = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         address_tfield = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -120,10 +121,10 @@ public class RegisterPage extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
@@ -158,7 +159,7 @@ public class RegisterPage extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addGroup(registerpageLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(cancelBtn)))
                 .addGroup(registerpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registerpageLayout.createSequentialGroup()
                         .addGap(108, 108, 108)
@@ -215,7 +216,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(registerpageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(cancelBtn))
                 .addGap(28, 28, 28))
         );
 
@@ -291,11 +292,11 @@ public class RegisterPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        WelcomePage wp = new WelcomePage();
-        wp.setVisible(true);
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        OODJ_2023.wp = new WelcomePage();
+       OODJ_2023.wp.setVisible(true);
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void male_rbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_male_rbtnActionPerformed
         // TODO add your handling code here:
@@ -351,10 +352,10 @@ public class RegisterPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_tfield;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JRadioButton female_rbtn;
     private javax.swing.JTextField ic_tfield;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

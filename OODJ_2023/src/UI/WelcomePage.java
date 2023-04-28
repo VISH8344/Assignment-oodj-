@@ -4,8 +4,10 @@
  */
 package UI;
 
+import Model.Enum.UserRole;
 import Student.Room_DataIO;
 import Student.Student_DataIO;
+import oodj_2023.OODJ_2023;
 import static oodj_2023.OODJ_2023.lp;
 import static oodj_2023.OODJ_2023.wp;
 
@@ -36,8 +38,8 @@ public class WelcomePage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        adminLoginBtn = new javax.swing.JButton();
+        stuLoginBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,17 +48,17 @@ public class WelcomePage extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel2.setText("Hostel Management System");
 
-        jButton3.setText("Admin Login");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        adminLoginBtn.setText("Admin Login");
+        adminLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                adminLoginBtnActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Student Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        stuLoginBtn.setText("Student Login");
+        stuLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                stuLoginBtnActionPerformed(evt);
             }
         });
 
@@ -69,9 +71,9 @@ public class WelcomePage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(adminLoginBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(stuLoginBtn)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -81,8 +83,8 @@ public class WelcomePage extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1))
+                    .addComponent(adminLoginBtn)
+                    .addComponent(stuLoginBtn))
                 .addContainerGap(78, Short.MAX_VALUE))
         );
 
@@ -101,14 +103,17 @@ public class WelcomePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void adminLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginBtnActionPerformed
         wp.setVisible(false);
+        LoginPage lp = new LoginPage(UserRole.ADMIN);
         lp.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_adminLoginBtnActionPerformed
+
+    private void stuLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuLoginBtnActionPerformed
+        wp.setVisible(false);
+        LoginPage lp = new LoginPage(UserRole.STUDENT);
+        lp.setVisible(true);
+    }//GEN-LAST:event_stuLoginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,9 +121,9 @@ public class WelcomePage extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton adminLoginBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton stuLoginBtn;
     // End of variables declaration//GEN-END:variables
 }
