@@ -1,4 +1,4 @@
-package Model;
+package Model.old;
 
 import Model.Enum.RoomType;
 import java.io.Serializable;

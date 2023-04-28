@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author mingl
  */
 public class Reservation implements Serializable{
 

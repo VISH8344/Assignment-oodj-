@@ -70,7 +70,7 @@ public class Student extends User implements Serializable{
 
     @Override
     public String toString() {
-        return "Student{" + "name=" + name + ", NIC=" + NIC + ", address=" + address + ", gender=" + gender + ", balance=" + balance + '}';
+        return "Student{" + "name=" + name + ", NIC=" + NIC + ", address=" + address + ", gender=" + gender + ", balance=" + balance + ", username: "+ super.getUsername() +'}';
     }
     
 }

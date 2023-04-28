@@ -67,7 +67,7 @@ public class Payment implements Serializable{
         this.dateTime = dateTime;
     }
 
-    public boolean isIsRefunded() {
+    public boolean isRefunded() {
         return isRefunded;
     }
 

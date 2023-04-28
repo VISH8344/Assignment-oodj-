@@ -14,7 +14,7 @@ public class OODJ_2023 {
     
     public static Student student;
     public static WelcomePage wp = new WelcomePage();
-    public static RegisterPage rp = new RegisterPage();
+//    public static RegisterPage rp = new RegisterPage();
     public static LoginPage lp = new LoginPage(UserRole.STUDENT);
 
     private void initialize() {

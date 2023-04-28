@@ -1,6 +1,6 @@
 package Student;
 
-import Model.Room;
+import Model.old.Room;
 import Model.Enum.RoomType;
 import Model.subclass_room_old.Premium_single_room;
 import Model.subclass_room_old.Premium_twin_room;

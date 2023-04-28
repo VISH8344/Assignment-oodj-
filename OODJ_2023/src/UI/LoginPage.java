@@ -11,7 +11,7 @@ import Student.Booking_DataIO;
 import Student.Student_DataIO;
 import javax.swing.JOptionPane;
 import oodj_2023.OODJ_2023;
-import static oodj_2023.OODJ_2023.rp;
+//import static oodj_2023.OODJ_2023.rp;
 
 /**
  *
@@ -66,6 +66,11 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setText("password:");
 
         backBtn.setText("back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         loginBtn.setText("login");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +201,15 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
+        RegisterPage rp = new RegisterPage();
         rp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_register_btnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        OODJ_2023.wp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_backBtnActionPerformed
 
    
 

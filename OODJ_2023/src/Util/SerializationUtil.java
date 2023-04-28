@@ -10,20 +10,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  *
  */
 public class SerializationUtil {
-
+    
     // deserialize to Object from given file
-    public static Object readObjectFromFile(String fileName) {
+    public static ArrayList<?> readObjectFromFile(String fileName) {
+        String filePath = "data/" + fileName;
         try {
-            FileInputStream fis = new FileInputStream(fileName);
+            FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            Object obj = ois.readObject();
+             ArrayList<?> objects  =(ArrayList) ois.readObject();
             ois.close();
-            return obj;
+            return objects;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -31,7 +33,7 @@ public class SerializationUtil {
     }
 
     // serialize the object and save it to file
-    public static boolean writeObjectToFile(Object object, String fileName) {
+    public static boolean writeObjectToFile(ArrayList<?> objects, String fileName) {
         String filePath = "data/" + fileName;
         boolean isFileExist = new File(filePath).isFile();
         if(!isFileExist){
@@ -42,7 +44,7 @@ public class SerializationUtil {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
             )
         {
-            objectOutputStream.writeObject(object);
+            objectOutputStream.writeObject(objects);
             return true;
         } catch (IOException e) {
             e.printStackTrace();

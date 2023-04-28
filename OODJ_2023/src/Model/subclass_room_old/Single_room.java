@@ -1,7 +1,7 @@
 
 package Model.subclass_room_old;
 
-import Model.Room;
+import Model.old.Room;
 import Model.Enum.RoomType;
 
 public class Single_room extends Room {

@@ -8,7 +8,6 @@ import javax.swing.JButton;
 
 /**
  *
- * @author mingl
  */
 public class HomePage extends javax.swing.JFrame {
 

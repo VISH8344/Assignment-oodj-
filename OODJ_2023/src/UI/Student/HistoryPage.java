@@ -4,8 +4,8 @@
  */
 package UI.Student;
 
-import Model.Booking;
-import Model.Room;
+import Model.old.Booking;
+import Model.old.Room;
 import Student.Booking_DataIO;
 import Student.Room_DataIO;
 import java.time.LocalDate;

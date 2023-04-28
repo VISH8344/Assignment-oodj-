@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  */
 public class SingleRoom extends HostelRoom {
-       private RoomType type = RoomType.TWIN;
+       private RoomType type = RoomType.SINGLE;
        private double roomPrice = 800.0;
 
     public SingleRoom(int roomID, boolean isAvailable, int capacity, ArrayList<Facility> facilities) {

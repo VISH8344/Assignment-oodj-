@@ -6,7 +6,6 @@ package UI.Admin;
 
 /**
  *
- * @author mingl
  */
 public class Template extends javax.swing.JFrame {
 

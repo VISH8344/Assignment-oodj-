@@ -57,4 +57,11 @@ public class HostelRoom implements Serializable {
     public void setFacilities(ArrayList<Facility> facilities) {
         this.facilities = facilities;
     }
+
+    @Override
+    public String toString() {
+        return "HostelRoom{" + "roomID=" + roomID + ", isAvailable=" + isAvailable + ", capacity=" + capacity + ", facilities=" + facilities + '}';
+    }
+    
+    
 }

@@ -6,7 +6,6 @@ package Util;
 
 /**
  *
- * @author mingl
  */
 public class FileName {
     public static String ADMIN = "admin.txt";

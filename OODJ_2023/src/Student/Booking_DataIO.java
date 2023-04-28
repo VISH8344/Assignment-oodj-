@@ -1,6 +1,6 @@
 package Student;
 
-import Model.Booking;
+import Model.old.Booking;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,7 +1,7 @@
 package UI.Student;
 
-import Model.Booking;
-import Model.Room;
+import Model.old.Booking;
+import Model.old.Room;
 import Model.Enum.RoomType;
 import Student.Booking_DataIO;
 import static Student.Booking_DataIO.booked_array;

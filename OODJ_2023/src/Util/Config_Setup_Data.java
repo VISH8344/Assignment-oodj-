@@ -15,6 +15,7 @@ import Model.HostelSubClass.TwinRoom;
 import Model.Payment;
 import Model.Reservation;
 import Model.Student;
+import Model.User;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ import java.util.ArrayList;
  */
 public class Config_Setup_Data {
 
+    private ArrayList<Facility> facilities = new ArrayList<>();
     private Admin admin;
     private Student student;
-    private ArrayList<Facility> facilities = new ArrayList<>();
     private HostelRoom room;
     private HostelRoom room2;
     private HostelRoom room3;
@@ -37,12 +38,22 @@ public class Config_Setup_Data {
     private Reservation reservation;
     private Payment payment;
     private Payment payment2;
+    private Payment payment3;
+    
+    private final ArrayList<User> admins = new ArrayList<>();
+    private final ArrayList<User> students = new ArrayList<>();
+    private final ArrayList<HostelRoom> rooms = new ArrayList<>();
+    private final ArrayList<Application> applications = new ArrayList<>();
+    private final ArrayList<Reservation> reservations = new ArrayList<>();
+    private final ArrayList<Payment> payments = new ArrayList<>();
 
     public void TempUserData() {
         admin = new Admin("admin", "123");
         student = new Student(1, "Cindy", "0211221122", "3, Jalan Jagong, Taman Bunga", "FEMALE", 1000.0,"cindy223","123");
-        SerializationUtil.writeObjectToFile(admin, FileName.ADMIN);
-        SerializationUtil.writeObjectToFile(student, FileName.STUDENT);
+        admins.add(admin);
+        students.add(student);
+        SerializationUtil.writeObjectToFile(this.admins, FileName.ADMIN);
+        SerializationUtil.writeObjectToFile(this.students, FileName.STUDENT);
     }
 
     public void TempHostelData() {
@@ -52,31 +63,35 @@ public class Config_Setup_Data {
          room2 = new SingleRoom(2, true, 1, facilities);
          room3 = new TwinRoom(3, true, 2, facilities);
          room4 = new PremiumSingleRoom(4, true, 1, facilities);
-         
-        SerializationUtil.writeObjectToFile(room, FileName.ROOM);
-        SerializationUtil.writeObjectToFile(room2, FileName.ROOM);
-        SerializationUtil.writeObjectToFile(room3, FileName.ROOM);
-        SerializationUtil.writeObjectToFile(room4, FileName.ROOM);
+         rooms.add(room);
+         rooms.add(room2);
+         rooms.add(room3);
+         rooms.add(room4);
+        SerializationUtil.writeObjectToFile(rooms, FileName.ROOM);
     }
 
     public void TempApplicationData() {
-         application = new Application(1, student, room, LocalDateTime.now(), payment, ApplicationStatus.PENDING,"");
+        application = new Application(1, student, room, LocalDateTime.now(), payment, ApplicationStatus.PENDING,"");
         application2 = new Application(1, student, room, LocalDateTime.now(), payment, ApplicationStatus.REJECTED,"");
-        SerializationUtil.writeObjectToFile(application, FileName.APPLICATION);
-        SerializationUtil.writeObjectToFile(application2, FileName.APPLICATION);
-        SerializationUtil.writeObjectToFile(reservation, FileName.RESERVATION);
+        applications.add(application);
+        applications.add(application2);
+        SerializationUtil.writeObjectToFile(applications, FileName.APPLICATION);
     }
     
     public void TempReservationData() {
         reservation = new Reservation(1,application,LocalDateTime.now(),LocalDateTime.of(2023, 8, 31, 0, 0), 12);
-        SerializationUtil.writeObjectToFile(reservation, FileName.RESERVATION);
+        reservations.add(reservation);
+        SerializationUtil.writeObjectToFile(reservations, FileName.RESERVATION);
     }
     
     public void TempPaymentData(){
         payment = new Payment(1, student, room, 500.0,LocalDateTime.now(), false);
-        payment2 = new Payment(1, student, room, 500.0,LocalDateTime.now(), true);
-        SerializationUtil.writeObjectToFile(payment, FileName.PAYMENT);
-        SerializationUtil.writeObjectToFile(payment2, FileName.PAYMENT);
+        payment2 = new Payment(2, student, room, 500.0,LocalDateTime.now(), true);
+        payment3 = new Payment(3, student, room, 500.0,LocalDateTime.now(), false);
+        payments.add(payment);
+        payments.add(payment2);
+        payments.add(payment3);
+        SerializationUtil.writeObjectToFile(payments, FileName.PAYMENT);
     }
     
     public static void InitializeData(){
