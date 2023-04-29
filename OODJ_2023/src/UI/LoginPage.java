@@ -7,8 +7,13 @@ package UI;
 import UI.Student.MainPage;
 import Model.Enum.UserRole;
 import Model.Student;
+import Model.User;
 import Student.Booking_DataIO;
 import Student.Student_DataIO;
+import UI.Admin.AdminHomePage;
+import Util.FileName;
+import Util.SerializationUtil;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oodj_2023.OODJ_2023;
 //import static oodj_2023.OODJ_2023.rp;
@@ -18,11 +23,13 @@ import oodj_2023.OODJ_2023;
  * @author peterdash
  */
 public class LoginPage extends javax.swing.JFrame {
-
+    
+    private UserRole role;
     /**
      * Creates new form LoginPage
      */
     public LoginPage(UserRole role) {
+        this.role = role;
         initComponents();
         String roleName = role.name().substring(0, 1).toUpperCase() + role.name().substring(1).toLowerCase();
         loginTitle.setText(roleName + " Login");
@@ -171,32 +178,50 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_uname_fieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        String filename = FileName.STUDENT;
+        if(this.role == UserRole.ADMIN){
+            filename = FileName.ADMIN;
+        }
+        
+        ArrayList<User> users = (ArrayList<User>) SerializationUtil.readObjectFromFile(filename);
         try {
-            String student_uname = uname_field.getText();
-            String student_pass = pass_field.getText();
+            String uname = uname_field.getText();
+            String upass = pass_field.getText();
 
-            Student found = Student_DataIO.checkusername(student_uname);
+//            Student found = Student_DataIO.checkusername(uname);
 
-            if (student_uname.isEmpty() || student_pass.isEmpty()) {
-                throw new Exception();
-
-            } else {
-                if (found != null && student_pass.equals(found.getPassword())) {
-//                    OODJ_2023.studentlogin = found;
-                    JOptionPane.showMessageDialog(loginpage, "Login Successful!");
+           if(!uname.isEmpty()  || !upass.isEmpty()){
+               boolean userExist = false;
+                for(User user : users){
+                    if(user.getUsername().equals(uname) && user.getPassword().equals(upass)){
+                        userExist = true;
+                        OODJ_2023.current_user = user;
+                        break;
+                    }
+                }
+                
+                if(userExist){
+                     JOptionPane.showMessageDialog(loginpage, "Login Successful!");
                     uname_field.setText("");
                     pass_field.setText("");
                     this.setVisible(false);
-                    MainPage mp = new MainPage();
-                    mp.setVisible(true);
-                } else {
-                    throw new Exception();
-                }
-            }
+                    if(this.role == UserRole.ADMIN){
+                        AdminHomePage adminhp = new AdminHomePage();
+                        adminhp.setVisible(true);
+                    }
+                    if(this.role == UserRole.STUDENT){
+                        MainPage mp = new MainPage();
+                        mp.setVisible(true);
+                    }
+                    return;
+                } 
+           }
+           throw new Exception();
+
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(loginpage,
                     "Please ensure that you have entered your username and password correctly.");
-
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 

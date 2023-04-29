@@ -4,10 +4,12 @@
  */
 package UI.Student;
 
+import Model.Student;
 import UI.Student.EditPage;
 import UI.Student.HistoryPage;
 import UI.Student.BookingPage;
 import UI.WelcomePage;
+import oodj_2023.OODJ_2023;
 
 /**
  *
@@ -23,13 +25,14 @@ public class MainPage extends javax.swing.JFrame {
         display_student_data();
     }
     private void display_student_data(){
-    jLabel3.setText(oodj_2023.OODJ_2023.student.getName());
-    jLabel10.setText(oodj_2023.OODJ_2023.student.getUsername());
-    jLabel11.setText(oodj_2023.OODJ_2023.student.getName());
-    jLabel12.setText(oodj_2023.OODJ_2023.student.getNIC());
-    jLabel13.setText(oodj_2023.OODJ_2023.student.getAddress());
-    jLabel14.setText(oodj_2023.OODJ_2023.student.getGender());
-    jLabel16.setText(Double.toString(oodj_2023.OODJ_2023.student.getBalance()));
+        Student student = (Student) OODJ_2023.current_user;
+    jLabel3.setText(student.getUsername());
+    jLabel10.setText(student.getUsername());
+    jLabel11.setText(student.getName());
+    jLabel12.setText(student.getNIC());
+    jLabel13.setText(student.getAddress());
+    jLabel14.setText(student.getGender());
+    jLabel16.setText(Double.toString(student.getBalance()));
     }
     
     /**
