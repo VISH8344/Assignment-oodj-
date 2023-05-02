@@ -4,6 +4,7 @@
  */
 package UI.Admin;
 
+import Controller.HostelRoomController;
 import Model.HostelRoom;
 import Model.HostelSubClass.PremiumSingleRoom;
 import Model.HostelSubClass.PremiumTwinRoom;
@@ -74,8 +75,10 @@ public class RoomCard extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         editBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
+        isAvailableLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(204, 255, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         RoomTypeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         RoomTypeLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -105,6 +108,8 @@ public class RoomCard extends javax.swing.JPanel {
         jLabel3.setText("RM");
 
         editBtn.setText("Edit");
+        editBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        editBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editBtnActionPerformed(evt);
@@ -112,39 +117,46 @@ public class RoomCard extends javax.swing.JPanel {
         });
 
         deleteBtn.setText("Delete");
+        deleteBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
 
+        isAvailableLabel.setBackground(new java.awt.Color(0, 0, 0));
+        isAvailableLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        isAvailableLabel.setForeground(new java.awt.Color(102, 102, 102));
+        isAvailableLabel.setText("[is available]");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(facilitiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RoomTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(RoomTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(isAvailableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(facilitiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(contractLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contractLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(priceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contractLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(contractLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editBtn)
-                    .addComponent(deleteBtn))
-                .addGap(14, 14, 14))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,18 +167,18 @@ public class RoomCard extends javax.swing.JPanel {
                     .addComponent(RoomTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(isAvailableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(facilitiesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(contractLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(contractLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(contractLabel1)))
-                        .addGap(0, 10, Short.MAX_VALUE)))
+                            .addComponent(contractLabel1))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -185,12 +197,12 @@ public class RoomCard extends javax.swing.JPanel {
         switch (res) {
             case 0:
                 System.out.println("Pressed YES");
+                HostelRoomController.ActivateHostelRoomController().deleteHostelRoom(this.room);
+                AdminRoomManagement.activateUI().resetRooms();
                 break;
             case 1:
-                System.out.println("Pressed NO");
                 break;
             default:
-                System.out.println("Pressed CANCEL");
                 break;
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
@@ -203,6 +215,7 @@ public class RoomCard extends javax.swing.JPanel {
     private javax.swing.JButton deleteBtn;
     private javax.swing.JButton editBtn;
     private javax.swing.JLabel facilitiesLabel;
+    private javax.swing.JLabel isAvailableLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel priceLabel;

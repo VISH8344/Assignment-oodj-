@@ -6,6 +6,7 @@ package UI.Admin;
 
 import Controller.HostelRoomController;
 import Model.Enum.RoomType;
+import static Model.Enum.RoomType.PREMIUMTWIN;
 import Model.HostelRoom;
 import Model.HostelSubClass.PremiumSingleRoom;
 import Model.HostelSubClass.PremiumTwinRoom;
@@ -22,15 +23,60 @@ import javax.swing.JPanel;
 public class AdminRoomManagement extends javax.swing.JFrame {
 
     private ArrayList<?> rooms = new ArrayList<>();
+    private static RoomType type;
+    
+    private static AdminRoomManagement roomManagementUI;
+    
+    public static AdminRoomManagement activateUI(){
+        if(AdminRoomManagement.roomManagementUI == null){
+            AdminRoomManagement.roomManagementUI = new AdminRoomManagement();
+        }
+        return AdminRoomManagement.roomManagementUI;
+    }
 
     /**
      * Creates new form Template
      */
     public AdminRoomManagement() {
         initComponents();
-        switchRoomType(RoomType.SINGLE);
-        typeTitleLabel.setText("Single");
+//        switchRoomType(RoomType.SINGLE);
+        rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
+        generateRoomCard();
+        typeTitleLabel.setText("All");
         setLocationRelativeTo(null);
+    }
+    
+    public void resetRooms(){
+        System.out.println("arm.type: "+type);
+        if(null == type){
+            rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
+        } else switch (type) {
+            case SINGLE:
+                System.out.println("type: ??? "+type);
+                rooms = HostelRoomController.ActivateHostelRoomController().getSingleRooms();
+                break;
+            case TWIN:
+                rooms = HostelRoomController.ActivateHostelRoomController().getTwinRooms();
+                break;
+            case PREMIUMSINGLE:
+                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
+                break;
+            case PREMIUMTWIN:
+                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
+                break;
+            default:
+                break;
+        }
+//        switch(AdminRoomManagement.type){
+//            case SINGLE:
+//            case TWIN:
+//                rooms = HostelRoomController.ActivateHostelRoomController().getTwinRooms();
+//            case PREMIUMSINGLE:
+//                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
+//            case PREMIUMTWIN:
+//                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
+//        }
+        generateRoomCard();
     }
 
     /**
@@ -97,6 +143,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         roomCardsPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         singleRoomFilterBtn.setText("Single");
+        singleRoomFilterBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         singleRoomFilterBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleRoomFilterBtnActionPerformed(evt);
@@ -104,6 +151,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         });
 
         twinRoomFilterBtn.setText("Twin");
+        twinRoomFilterBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         twinRoomFilterBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 twinRoomFilterBtnActionPerformed(evt);
@@ -111,6 +159,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         });
 
         pSingleFilterBtn.setText("Premium Single");
+        pSingleFilterBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pSingleFilterBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pSingleFilterBtnActionPerformed(evt);
@@ -118,6 +167,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         });
 
         pTwinFilterBtn.setText("Premium Twin");
+        pTwinFilterBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pTwinFilterBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pTwinFilterBtnActionPerformed(evt);
@@ -127,6 +177,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         addRoomBtn.setBackground(new java.awt.Color(204, 0, 255));
         addRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
         addRoomBtn.setText("+ ROOM");
+        addRoomBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addRoomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addRoomBtnActionPerformed(evt);
@@ -253,16 +304,20 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         switchRoomType(RoomType.PREMIUMTWIN);
     }//GEN-LAST:event_pTwinFilterBtnActionPerformed
 
-    private void switchRoomType(RoomType type) {
-        switch (type) {
+    private void switchRoomType(RoomType room_type) {
+        AdminRoomManagement.type = room_type;
+        switch (room_type) {
             case SINGLE -> rooms = (ArrayList<SingleRoom>) HostelRoomController.ActivateHostelRoomController().getSingleRooms();
             case TWIN -> rooms = (ArrayList<TwinRoom>) HostelRoomController.ActivateHostelRoomController().getTwinRooms();
             case PREMIUMSINGLE -> rooms = (ArrayList<PremiumSingleRoom>) HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
             case PREMIUMTWIN -> rooms = (ArrayList<PremiumTwinRoom>) HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
         }
-        
+        generateRoomCard();
+    }
+    
+    private void generateRoomCard(){
         JPanel panel = new JPanel();
-        int height = 115 * rooms.size();
+        int height = 130 * rooms.size();
         panel.setPreferredSize(new Dimension(843, height));
 
         rooms.forEach(room -> {
@@ -275,38 +330,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminRoomManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminRoomManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminRoomManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminRoomManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminRoomManagement().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRoomBtn;

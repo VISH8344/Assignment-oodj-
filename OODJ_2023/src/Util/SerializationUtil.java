@@ -40,11 +40,11 @@ public class SerializationUtil {
             FileUtil.createFile(filePath);
         }
         try (
-                FileOutputStream fileOutputStream = new FileOutputStream(filePath); 
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
+                FileOutputStream fos = new FileOutputStream(filePath); 
+                ObjectOutputStream oos = new ObjectOutputStream(fos)
             )
         {
-            objectOutputStream.writeObject(objects);
+            oos.writeObject(objects);
             return true;
         } catch (IOException e) {
             e.printStackTrace();

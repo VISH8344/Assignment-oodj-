@@ -203,6 +203,9 @@
         <Component class="javax.swing.JButton" name="singleRoomFilterBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Single"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleRoomFilterBtnActionPerformed"/>
@@ -211,6 +214,9 @@
         <Component class="javax.swing.JButton" name="twinRoomFilterBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Twin"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="twinRoomFilterBtnActionPerformed"/>
@@ -219,6 +225,9 @@
         <Component class="javax.swing.JButton" name="pSingleFilterBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Premium Single"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pSingleFilterBtnActionPerformed"/>
@@ -227,6 +236,9 @@
         <Component class="javax.swing.JButton" name="pTwinFilterBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Premium Twin"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pTwinFilterBtnActionPerformed"/>
@@ -241,6 +253,9 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="+ ROOM"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addRoomBtnActionPerformed"/>

@@ -33,6 +33,11 @@ public class Config_Setup_Data {
     private HostelRoom room2;
     private HostelRoom room3;
     private HostelRoom room4;
+    private HostelRoom room11;
+    private HostelRoom room12;
+    private HostelRoom room13;
+    private HostelRoom room14;
+    private HostelRoom room15;
     private Application application;
     private Application application2;
     private Reservation reservation;
@@ -61,12 +66,22 @@ public class Config_Setup_Data {
         facilities.add(Facility.AIRCOND);
          room = new SingleRoom(1, true, 1, facilities);
          room2 = new SingleRoom(2, true, 1, facilities);
+         room11 = new SingleRoom(5, true, 1, facilities);
+         room12 = new SingleRoom(6, true, 1, facilities);
          room3 = new TwinRoom(3, true, 2, facilities);
+         room13 = new TwinRoom(7, true, 2, facilities);
          room4 = new PremiumSingleRoom(4, true, 1, facilities);
+         room14 = new PremiumSingleRoom(8, true, 1, facilities);
+         room15 = new PremiumSingleRoom(9, false, 1, facilities);
          rooms.add(room);
          rooms.add(room2);
          rooms.add(room3);
          rooms.add(room4);
+         rooms.add(room11);
+         rooms.add(room12);
+         rooms.add(room13);
+         rooms.add(room14);
+         rooms.add(room15);
         SerializationUtil.writeObjectToFile(rooms, FileName.ROOM);
     }
 

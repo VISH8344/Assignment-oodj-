@@ -85,6 +85,19 @@ public class HostelRoomController implements Controller {
         }
         saveRecords();
     }
+    
+    public void deleteHostelRoom(HostelRoom room){
+        try{
+            if(rooms.remove(room)){
+                saveRecords();
+            }
+            else{
+                throw new Exception();
+            }
+        }catch (Exception ex){
+            System.out.println("err occured when deleting hostel room. err: "+ ex.getMessage());
+        }
+    }
 
     @Override
     public void saveRecords() {

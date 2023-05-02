@@ -228,8 +228,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void RoomManagementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomManagementBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        AdminRoomManagement arm = new AdminRoomManagement();
-        arm.setVisible(true);
+        AdminRoomManagement.activateUI().setVisible(true);
     }//GEN-LAST:event_RoomManagementBtnActionPerformed
 
     private void ApplicationManagementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplicationManagementBtnActionPerformed
