@@ -62,20 +62,23 @@ public class ReservationController implements Controller {
             }
         }
         if (response == null) {
-            System.out.println("Payment with this id : " + id + " is not found");
+                System.out.println("Reservation with this id : " + id + " is not found");
         }
         return response;
-        return reservations.stream()
-                .filter(Reservation -> Reservation.getReservationID() == id)
-                .findFirst()
-                .orElse(null);
     }
 
     public Reservation getReservationByStudentID(int studentID) {
-        return reservations.stream()
-                .filter(reservation -> (reservation.getApplication().getStudent().getStudentID() == studentID))
-                .findFirst()
-                .orElse(null);
+        Reservation response = null;
+        for (int i = 0; i < reservations.size(); i++) {
+            if (reservations.get(i).getApplication().getStudent().getStudentID()== studentID) {
+                response = reservations.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+                System.out.println("Reservation with this studentID : " + studentID + " is not found");
+        }
+        return response;
     }
 
     public void addReservation(Reservation Reservation) {

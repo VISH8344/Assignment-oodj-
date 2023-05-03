@@ -22,9 +22,31 @@ public class StudentController implements Controller {
         students = (ArrayList<Student>) SerializationUtil.readObjectFromFile(FileName.STUDENT);
     }
 
+    private int generateUniqueNumber(int num){
+        return num + 1;
+    }
+    
+    private boolean checkIDIsExist(int id){
+        boolean isFound = false;
+        for(Student stu : students){
+            if(stu.getStudentID()== id){
+                isFound = true;
+            }
+        }
+        return isFound;
+    }
+
     @Override
     public int getNewID() {
-        return students.size() + 1;
+        int tempNewId = students.size() + 1;
+        boolean isIDExist = checkIDIsExist(tempNewId);
+        while(isIDExist){
+            tempNewId = generateUniqueNumber(tempNewId);
+            if(!checkIDIsExist(tempNewId)){
+                break;
+            }
+        }
+        return tempNewId;
     }
 
     public ArrayList<Student> getStudents() {
@@ -32,17 +54,31 @@ public class StudentController implements Controller {
     }
 
     public Student getStudentById(int id) {
-        return students.stream()
-                .filter(student -> student.getStudentID() == id)
-                .findFirst()
-                .orElse(null);
+        Student response = null;
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getStudentID()== id) {
+                response = students.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+                System.out.println("Student with this id : " + id + " is not found");
+        }
+        return response;
     }
 
     public Student getStudentByUsername(String userName) {
-        return students.stream()
-                .filter(student -> (student.getUsername() == null ? userName == null : student.getUsername().equals(userName)))
-                .findFirst()
-                .orElse(null);
+        Student response = null;
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getUsername() == null ? userName == null : students.get(i).getUsername().equals(userName)) {
+                response = students.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+                System.out.println("Student with this username : " + userName + " is not found");
+        }
+        return response;
     }
 
     public void addStudent(Student student) {
