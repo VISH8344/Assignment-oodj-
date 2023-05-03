@@ -21,10 +21,32 @@ public class ApplicationController implements Controller {
         this.applications = new ArrayList<>();
         applications = (ArrayList<Application>) SerializationUtil.readObjectFromFile(FileName.APPLICATION);
     }
+    
+    private int generateUniqueNumber(int num){
+        return num + 1;
+    }
+    
+    private boolean checkIDIsExist(int id){
+        boolean isFound = false;
+        for(Application ap : applications){
+            if(ap.getApplicationID() == id){
+                isFound = true;
+            }
+        }
+        return isFound;
+    }
 
     @Override
     public int getNewID() {
-        return applications.size() + 1;
+        int tempNewId = applications.size() + 1;
+        boolean isIDExist = checkIDIsExist(tempNewId);
+        while(isIDExist){
+            tempNewId = generateUniqueNumber(tempNewId);
+            if(!checkIDIsExist(tempNewId)){
+                break;
+            }
+        }
+        return tempNewId;
     }
 
     public ArrayList<Application> getApplications() {
@@ -32,17 +54,31 @@ public class ApplicationController implements Controller {
     }
 
     public Application getApplicationById(int id) {
-        return applications.stream()
-                .filter(application -> application.getApplicationID() == id)
-                .findFirst()
-                .orElse(null);
+        Application response = null;
+        for (int i = 0; i < applications.size(); i++) {
+            if (applications.get(i).getApplicationID() == id) {
+                response = applications.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+            System.out.println("Application with this id : " + id + " is not found");
+        }
+        return response;
     }
 
     public Application getApplicationByStudentID(int stuID) {
-        return applications.stream()
-                .filter(application -> (application.getStudent().getStudentID() == stuID))
-                .findFirst()
-                .orElse(null);
+        Application response = null;
+        for (int i = 0; i < applications.size(); i++) {
+            if (applications.get(i).getStudent().getStudentID()== stuID) {
+                response = applications.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+            System.out.println("Application with this student id : " + stuID + " is not found");
+        }
+        return response;
     }
 
     public void add(Application Application) {
@@ -73,4 +109,6 @@ public class ApplicationController implements Controller {
 //        });
 ////        System.out.println(stuController.getNewID());
 //    }
+
+   
 }

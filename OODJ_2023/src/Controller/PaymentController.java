@@ -8,7 +8,6 @@ import Model.Payment;
 import Util.FileName;
 import Util.SerializationUtil;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -30,9 +29,31 @@ public class PaymentController implements Controller {
         payments = (ArrayList<Payment>) SerializationUtil.readObjectFromFile(FileName.PAYMENT);
     }
 
+     private int generateUniqueNumber(int num){
+        return num + 1;
+    }
+    
+    private boolean checkIDIsExist(int id){
+        boolean isFound = false;
+        for(Payment payment : payments){
+            if(payment.getPaymentID()== id){
+                isFound = true;
+            }
+        }
+        return isFound;
+    }
+
     @Override
     public int getNewID() {
-        return payments.size() + 1;
+        int tempNewId = payments.size() + 1;
+        boolean isIDExist = checkIDIsExist(tempNewId);
+        while(isIDExist){
+            tempNewId = generateUniqueNumber(tempNewId);
+            if(!checkIDIsExist(tempNewId)){
+                break;
+            }
+        }
+        return tempNewId;
     }
 
     public ArrayList<Payment> getPayments() {
@@ -40,9 +61,16 @@ public class PaymentController implements Controller {
     }
 
     public ArrayList<Payment> getValidPayments() {
-         return payments.stream()
-                   .filter(payment -> !payment.isRefunded())
-                   .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Payment> response = null;
+        for (int i = 0; i < payments.size(); i++) {
+            if (!payments.get(i).isRefunded()) {
+                response.add(payments.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("No valid payment");
+        }
+        return response;
     }
 
     public double getTotalSales() {
@@ -57,17 +85,30 @@ public class PaymentController implements Controller {
     }
 
     public Payment getPaymentById(int id) {
-        return payments.stream()
-                .filter(Payment -> Payment.getPaymentID() == id)
-                .findFirst()
-                .orElse(null);
+        Payment response = null;
+        for (int i = 0; i < payments.size(); i++) {
+            if (payments.get(i).getPaymentID()== id) {
+                response = payments.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+            System.out.println("Payment with this id : " + id + " is not found");
+        }
+        return response;
     }
 
-    public Payment getPaymentByStudentID(int stuID) {
-        return payments.stream()
-                .filter(payment -> (payment.getStudent().getStudentID() == stuID))
-                .findFirst()
-                .orElse(null);
+    public ArrayList<Payment> getPaymentsByStudentID(int stuID) {
+        ArrayList<Payment> responses = null;
+        for (int i = 0; i < payments.size(); i++) {
+            if (payments.get(i).getStudent().getStudentID() == stuID) {
+                responses.add(payments.get(i));
+            }
+        }
+        if (responses == null) {
+            System.out.println("Payment with this student id : " + stuID + " is not found");
+        }
+        return responses;
     }
 
     public <T> void add(Payment payment) {

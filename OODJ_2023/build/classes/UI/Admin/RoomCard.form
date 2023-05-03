@@ -29,14 +29,14 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="RoomTypeLabel" min="-2" pref="195" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="isAvailableLabel" min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="facilitiesLabel" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
+                  <Component id="facilitiesLabel" min="-2" pref="422" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="121" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="contractLabel1" min="-2" pref="159" max="-2" attributes="0"/>
                   <Component id="contractLabel" min="-2" pref="159" max="-2" attributes="0"/>

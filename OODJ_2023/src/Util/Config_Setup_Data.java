@@ -4,6 +4,7 @@
  */
 package Util;
 
+import Controller.HostelRoomController;
 import Model.Admin;
 import Model.Application;
 import Model.Enum.ApplicationStatus;
@@ -27,6 +28,14 @@ import java.util.ArrayList;
 public class Config_Setup_Data {
 
     private ArrayList<Facility> facilities = new ArrayList<>();
+    private ArrayList<Facility> facilities2 = new ArrayList<>();
+    private ArrayList<Facility> facilities3 = new ArrayList<>();
+    private ArrayList<Facility> facilities4 = new ArrayList<>();
+    private ArrayList<Facility> facilities5 = new ArrayList<>();
+    private ArrayList<Facility> facilities6 = new ArrayList<>();
+    private ArrayList<Facility> facilities7 = new ArrayList<>();
+    private ArrayList<Facility> facilities8 = new ArrayList<>();
+    private ArrayList<Facility> facilities9 = new ArrayList<>();
     private Admin admin;
     private Student student;
     private HostelRoom room;
@@ -64,15 +73,27 @@ public class Config_Setup_Data {
     public void TempHostelData() {
         facilities.add(Facility.KITCHEN);
         facilities.add(Facility.AIRCOND);
+        facilities2.add(Facility.AIRCOND);
+        facilities2.add(Facility.AIRCOND);
+        facilities2.add(Facility.TELEVISION);
+        facilities3.add(Facility.AIRCOND);
+        facilities4.add(Facility.AIRCOND);
+        facilities5.add(Facility.AIRCOND);
+        facilities5.add(Facility.ATTACHED_BATHROOM);
+        facilities6.add(Facility.KITCHEN);
+        facilities7.add(Facility.AIRCOND);
+        facilities8.add(Facility.WASHING_MACHINE);
+        facilities9.add(Facility.WASHING_MACHINE);
+        
          room = new SingleRoom(1, true, 1, facilities);
-         room2 = new SingleRoom(2, true, 1, facilities);
-         room11 = new SingleRoom(5, true, 1, facilities);
-         room12 = new SingleRoom(6, true, 1, facilities);
-         room3 = new TwinRoom(3, true, 2, facilities);
-         room13 = new TwinRoom(7, true, 2, facilities);
-         room4 = new PremiumSingleRoom(4, true, 1, facilities);
-         room14 = new PremiumSingleRoom(8, true, 1, facilities);
-         room15 = new PremiumSingleRoom(9, false, 1, facilities);
+         room2 = new SingleRoom(2, true, 1, facilities2);
+         room11 = new SingleRoom(5, true, 1, facilities3);
+         room12 = new SingleRoom(6, true, 1, facilities4);
+         room3 = new TwinRoom(3, true, 2, facilities5);
+         room13 = new TwinRoom(7, true, 2, facilities6);
+         room4 = new PremiumSingleRoom(4, true, 1, facilities7);
+         room14 = new PremiumSingleRoom(8, true, 1, facilities8);
+         room15 = new PremiumSingleRoom(9, false, 0, facilities9);
          rooms.add(room);
          rooms.add(room2);
          rooms.add(room3);
@@ -82,6 +103,9 @@ public class Config_Setup_Data {
          rooms.add(room13);
          rooms.add(room14);
          rooms.add(room15);
+         rooms.forEach(room -> {
+             System.out.println("room: " + room.toString());
+         });
         SerializationUtil.writeObjectToFile(rooms, FileName.ROOM);
     }
 

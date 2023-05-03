@@ -19,7 +19,7 @@ public class SingleRoom extends HostelRoom {
     public SingleRoom(int roomID, boolean isAvailable, int capacity, ArrayList<Facility> facilities) {
         super(roomID, isAvailable, capacity, facilities);
     }
-
+    
     public RoomType getType() {
         return type;
     }
@@ -35,5 +35,4 @@ public class SingleRoom extends HostelRoom {
     public void setRoomPrice(double roomPrice) {
         this.roomPrice = roomPrice;
     }
-    
 }

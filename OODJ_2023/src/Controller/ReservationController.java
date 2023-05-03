@@ -22,9 +22,31 @@ public class ReservationController implements Controller {
         reservations = (ArrayList<Reservation>) SerializationUtil.readObjectFromFile(FileName.RESERVATION);
     }
 
+    private int generateUniqueNumber(int num){
+        return num + 1;
+    }
+    
+    private boolean checkIDIsExist(int id){
+        boolean isFound = false;
+        for(Reservation reservation : reservations){
+            if(reservation.getReservationID()== id){
+                isFound = true;
+            }
+        }
+        return isFound;
+    }
+
     @Override
     public int getNewID() {
-        return reservations.size() + 1;
+        int tempNewId = reservations.size() + 1;
+        boolean isIDExist = checkIDIsExist(tempNewId);
+        while(isIDExist){
+            tempNewId = generateUniqueNumber(tempNewId);
+            if(!checkIDIsExist(tempNewId)){
+                break;
+            }
+        }
+        return tempNewId;
     }
 
     public ArrayList<Reservation> getReservations() {
@@ -32,6 +54,17 @@ public class ReservationController implements Controller {
     }
 
     public Reservation getReservationById(int id) {
+        Reservation response = null;
+        for (int i = 0; i < reservations.size(); i++) {
+            if (reservations.get(i).getReservationID()== id) {
+                response = reservations.get(i);
+                break;
+            }
+        }
+        if (response == null) {
+            System.out.println("Payment with this id : " + id + " is not found");
+        }
+        return response;
         return reservations.stream()
                 .filter(Reservation -> Reservation.getReservationID() == id)
                 .findFirst()

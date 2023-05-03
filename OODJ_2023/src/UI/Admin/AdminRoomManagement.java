@@ -47,7 +47,6 @@ public class AdminRoomManagement extends javax.swing.JFrame {
     }
     
     public void resetRooms(){
-        System.out.println("arm.type: "+type);
         if(null == type){
             rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
         } else switch (type) {
@@ -278,6 +277,8 @@ public class AdminRoomManagement extends javax.swing.JFrame {
 
     private void addRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomBtnActionPerformed
         // TODO add your handling code here:
+        AdminRoomManagementForm armf = new AdminRoomManagementForm();
+        armf.setVisible(true);
     }//GEN-LAST:event_addRoomBtnActionPerformed
 
     private void singleRoomFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleRoomFilterBtnActionPerformed

@@ -16,10 +16,10 @@ public enum RoomType {
                 return "TWIN";
             }
             case PREMIUMSINGLE -> {
-                return "PREMIUMSINGLE";
+                return "PREMIUM SINGLE";
             }
             case PREMIUMTWIN -> {
-                return "PREMIUMTWIN";
+                return "PREMIUM TWIN";
             }
             default -> throw new IllegalArgumentException();
         }

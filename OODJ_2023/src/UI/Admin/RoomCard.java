@@ -27,11 +27,12 @@ public class RoomCard extends javax.swing.JPanel {
     public RoomCard(HostelRoom room) {
         this.room = room;
         initComponents();
-        RoomTypeLabel.setText(room.getClass().getSimpleName());
-        facilitiesLabel.setText(room.getFacilities().toString());
         
+        boolean isAvailable  = room.isAvailable();
+        String available = "Occupied";
         double price =0.0;
         DecimalFormat df = new DecimalFormat("0.00");
+        
         switch(room.getClass().getSimpleName()){
             case "SingleRoom" -> {
                 SingleRoom singleRoom = (SingleRoom) room;
@@ -50,7 +51,15 @@ public class RoomCard extends javax.swing.JPanel {
                 price = pmTwinRoom.getRoomPrice();
             }
         }
+        
+        if(isAvailable){
+            available = "Available";
+        }
+        
         priceLabel.setText(df.format(price));
+        RoomTypeLabel.setText(room.getClass().getSimpleName());
+        facilitiesLabel.setText(room.getFacilities().toString());
+        isAvailableLabel.setText(available);
     }
     
     public RoomCard roomCard(){
@@ -141,8 +150,8 @@ public class RoomCard extends javax.swing.JPanel {
                         .addComponent(RoomTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(isAvailableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(facilitiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                    .addComponent(facilitiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(contractLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contractLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,8 +194,9 @@ public class RoomCard extends javax.swing.JPanel {
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
-        
-        
+        AdminRoomManagementForm armf = new AdminRoomManagementForm();
+        armf.setRoom(room);
+        armf.setVisible(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
