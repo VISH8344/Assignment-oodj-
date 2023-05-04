@@ -4,13 +4,12 @@
  */
 package Model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  *
  */
-public class Reservation implements Serializable{
+public class Reservation{
 
     private int reservationID;
     private Application application; // for student and room information

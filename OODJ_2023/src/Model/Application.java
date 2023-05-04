@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  *
  */
-public class Application implements Serializable {
+public class Application{
 
     private int applicationID;
     private Student student;

@@ -4,13 +4,12 @@
  */
 package Model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  *
  */
-public class Payment implements Serializable{
+public class Payment{
     private int paymentID;
     private Student student;
     private HostelRoom room;

@@ -1,9 +1,8 @@
 package Model.old;
 
 import Model.Enum.RoomType;
-import java.io.Serializable;
 
-public abstract class Room implements Serializable{
+public abstract class Room{
     private int roomNumber;
     private int capacity;
     private double price;

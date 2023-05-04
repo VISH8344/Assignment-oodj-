@@ -1,9 +1,8 @@
 package Model;
 
 import Model.Enum.UserRole;
-import java.io.Serializable;
 
-public class Admin  extends User implements Serializable{
+public class Admin  extends User{
     private UserRole u_role = UserRole.ADMIN;
     public Admin(String username, String password){
         super(username, password);
@@ -18,5 +17,7 @@ public class Admin  extends User implements Serializable{
    public UserRole getUserRole(){
         return this.u_role;
     }
-
+    public String toFileContent(){
+        return this.getUsername() + ";" + this.getPassword();
+    }
 }

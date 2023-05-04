@@ -1,9 +1,8 @@
 package Model;
 
 import Model.Enum.UserRole;
-import java.io.Serializable;
 
-public class Student extends User implements Serializable{
+public class Student extends User{
     private int studentID;
     private String name;
     private String NIC;

@@ -1,9 +1,8 @@
 package Model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-class Topup implements Serializable{
+class Topups{
     private LocalDateTime dateTime;
     private double topupAmount;
     private Student student;

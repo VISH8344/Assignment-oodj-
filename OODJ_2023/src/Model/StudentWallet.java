@@ -1,9 +1,8 @@
 package Model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StudentWallet implements Serializable {
+public class StudentWallet {
     private double amount;
     private ArrayList<Topup> transaction_history;
 

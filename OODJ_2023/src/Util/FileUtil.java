@@ -4,8 +4,13 @@
  */
 package Util;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,5 +24,43 @@ public class FileUtil {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public static ArrayList<String[]> ReadFile(String filePath){
+        File file = new File(filePath);
+        ArrayList<String[]> fileRecords = new ArrayList<>();
+        if(!file.exists()){
+            try{
+                file.createNewFile();
+                System.out.println("file with this path: " + filePath + "isn't found.");
+                System.out.println("file with this path: " + filePath + "isn't found.");
+            }
+            catch(IOException e){
+                System.out.println("err occured when creating file: " + e.getMessage());
+            }
+        }
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String fileContents = br.readLine();
+            while(fileContents != null){
+                String[] eachLine = fileContents.split(";");
+                fileRecords.add(eachLine);
+            }
+        }
+        catch (IOException e){
+            System.out.println("err occured when reading this file " + filePath +"\nerr: " + e.getMessage());
+        }
+        return fileRecords;
+    }
+    
+    public static void WriteToFile(String filePath, ArrayList<String> contents){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
+            for (String line: contents){
+                bw.write(line);
+                bw.newLine();
+            }
+        }
+        catch(IOException e){
+            System.out.println("err occured when writing to this file:  "+ filePath +"\nerr: " + e.getMessage());
+        }
     }
 }

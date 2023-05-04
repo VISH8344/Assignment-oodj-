@@ -4,12 +4,11 @@
  */
 package Model.Enum;
 
-import java.io.Serializable;
 
 /**
  *
  */
-public enum Facility implements Serializable{
+public enum Facility{
     AIRCOND,
     KITCHEN,
     WASHING_MACHINE,
