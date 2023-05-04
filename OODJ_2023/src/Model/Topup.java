@@ -2,7 +2,7 @@ package Model;
 
 import java.time.LocalDateTime;
 
-class Topups{
+class Topup{
     private LocalDateTime dateTime;
     private double topupAmount;
     private Student student;
