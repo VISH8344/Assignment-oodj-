@@ -40,9 +40,9 @@ public class FileUtil {
             }
         }
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String fileContents = br.readLine();
-            while (fileContents != null) {
-                String[] eachLine = fileContents.split(";");
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] eachLine = line.split(";");
                 fileRecords.add(eachLine);
             }
         } catch (IOException e) {

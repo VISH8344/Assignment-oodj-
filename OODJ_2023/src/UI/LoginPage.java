@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Controller.StudentController;
+import Model.Admin;
 import UI.Student.MainPage;
 import Model.Enum.UserRole;
 import Model.Student;
@@ -12,7 +14,7 @@ import Student.Booking_DataIO;
 import Student.Student_DataIO;
 import UI.Admin.AdminHomePage;
 import Util.FileName;
-import Util.SerializationUtil;
+import Util.FileUtil;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oodj_2023.OODJ_2023;
@@ -23,8 +25,9 @@ import oodj_2023.OODJ_2023;
  * @author peterdash
  */
 public class LoginPage extends javax.swing.JFrame {
-    
+
     private UserRole role;
+
     /**
      * Creates new form LoginPage
      */
@@ -178,45 +181,47 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_uname_fieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        String filename = FileName.STUDENT;
-        if(this.role == UserRole.ADMIN){
-            filename = FileName.ADMIN;
+        ArrayList<? extends User> users = new ArrayList<>();
+        if (this.role == UserRole.STUDENT) {
+            users = StudentController.ActivateStudentController().getStudents();
+        } else {
+            ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.ADMIN);
+            String[] adminRecord = textRecords.get(0);
+            ArrayList<Admin> admins = new ArrayList<>();
+            admins.add(new Admin(adminRecord[0], adminRecord[1]));
+            users = admins;
         }
-        
-        ArrayList<User> users = (ArrayList<User>) SerializationUtil.readObjectFromFile(filename);
         try {
             String uname = uname_field.getText();
             String upass = pass_field.getText();
-
 //            Student found = Student_DataIO.checkusername(uname);
-
-           if(!uname.isEmpty()  || !upass.isEmpty()){
-               boolean userExist = false;
-                for(User user : users){
-                    if(user.getUsername().equals(uname) && user.getPassword().equals(upass)){
+            if (!uname.isEmpty() || !upass.isEmpty()) {
+                boolean userExist = false;
+                for (User user : users) {
+                    if (user.getUsername().equals(uname) && user.getPassword().equals(upass)) {
                         userExist = true;
                         OODJ_2023.current_user = user;
                         break;
                     }
                 }
-                
-                if(userExist){
-                     JOptionPane.showMessageDialog(loginpage, "Login Successful!");
+
+                if (userExist) {
+                    JOptionPane.showMessageDialog(loginpage, "Login Successful!");
                     uname_field.setText("");
                     pass_field.setText("");
                     this.setVisible(false);
-                    if(this.role == UserRole.ADMIN){
+                    if (this.role == UserRole.ADMIN) {
                         AdminHomePage adminhp = new AdminHomePage();
                         adminhp.setVisible(true);
                     }
-                    if(this.role == UserRole.STUDENT){
+                    if (this.role == UserRole.STUDENT) {
                         MainPage mp = new MainPage();
                         mp.setVisible(true);
                     }
                     return;
-                } 
-           }
-           throw new Exception();
+                }
+            }
+            throw new Exception();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

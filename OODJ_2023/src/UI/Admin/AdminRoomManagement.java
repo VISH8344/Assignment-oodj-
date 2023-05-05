@@ -42,7 +42,7 @@ public class AdminRoomManagement extends javax.swing.JFrame {
 //        switchRoomType(RoomType.SINGLE);
         rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
         generateRoomCard();
-        typeTitleLabel.setText("All");
+        typeTitleLabel.setText("ALL");
         setLocationRelativeTo(null);
     }
     
@@ -51,7 +51,6 @@ public class AdminRoomManagement extends javax.swing.JFrame {
             rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
         } else switch (type) {
             case SINGLE:
-                System.out.println("type: ??? "+type);
                 rooms = HostelRoomController.ActivateHostelRoomController().getSingleRooms();
                 break;
             case TWIN:
@@ -66,15 +65,6 @@ public class AdminRoomManagement extends javax.swing.JFrame {
             default:
                 break;
         }
-//        switch(AdminRoomManagement.type){
-//            case SINGLE:
-//            case TWIN:
-//                rooms = HostelRoomController.ActivateHostelRoomController().getTwinRooms();
-//            case PREMIUMSINGLE:
-//                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
-//            case PREMIUMTWIN:
-//                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
-//        }
         generateRoomCard();
     }
 

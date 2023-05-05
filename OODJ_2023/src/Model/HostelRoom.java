@@ -61,6 +61,4 @@ public class HostelRoom {
     public String toString() {
         return "HostelRoom{" + "roomID=" + roomID + ", isAvailable=" + isAvailable + ", capacity=" + capacity + ", facilities=" + facilities + '}';
     }
-    
-    
 }

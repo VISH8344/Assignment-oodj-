@@ -9,7 +9,6 @@ import Model.HostelSubClass.SingleRoom;
 import Model.HostelSubClass.TwinRoom;
 import Util.FileName;
 import Util.FileUtil;
-import Util.SerializationUtil;
 import java.util.ArrayList;
 
 public class HostelRoomController implements Controller {
@@ -36,25 +35,30 @@ public class HostelRoomController implements Controller {
     private HostelRoom fromTextToObject(String[] splittedLine) {
         HostelRoom response = null;
         int roomID = Integer.parseInt(splittedLine[0]);
-        RoomType type = RoomType.valueOf(splittedLine[1]);
+        RoomType type = RoomType.valueOf(splittedLine[1].replaceAll("\\s", ""));
         boolean available = Boolean.parseBoolean(splittedLine[2]);
         int capacity = Integer.parseInt(splittedLine[3]);
         String formatFacilityText = splittedLine[4].substring(1, splittedLine[4].length() - 1);
-        String[] eachFacilityText = formatFacilityText.split(",");
+        String[] eachFacilityText = formatFacilityText.split(", ");
         ArrayList<Facility> facilities = new ArrayList<>();
         for (String s : eachFacilityText) {
-            facilities.add(Facility.valueOf(s));
+            facilities.add(Facility.valueOf(s.strip()));
         }
         double price = Double.parseDouble(splittedLine[5]);
+        System.out.println(type.name());
         switch (type) {
             case SINGLE:
                 response = new SingleRoom(roomID, available, capacity, facilities);
+                break;
             case TWIN:
                 response = new TwinRoom(roomID, available, capacity, facilities);
+                break;
             case PREMIUMSINGLE:
                 response = new PremiumSingleRoom(roomID, available, capacity, facilities);
+                break;
             case PREMIUMTWIN:
                 response = new PremiumTwinRoom(roomID, available, capacity, facilities);
+                break;
         }
         return response;
     }
@@ -112,6 +116,7 @@ public class HostelRoomController implements Controller {
     }
 
     public ArrayList<HostelRoom> getHostelRooms() {
+//        rooms.forEach(r -> System.out.println(r.getClass().getSimpleName()));
         return this.rooms;
     }
 
@@ -130,7 +135,7 @@ public class HostelRoomController implements Controller {
     }
 
     public ArrayList<SingleRoom> getSingleRooms() {
-        ArrayList<SingleRoom> response = null;
+        ArrayList<SingleRoom> response = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i) instanceof SingleRoom) {
                 response.add((SingleRoom) rooms.get(i));
@@ -143,7 +148,7 @@ public class HostelRoomController implements Controller {
     }
 
     public ArrayList<TwinRoom> getTwinRooms() {
-        ArrayList<TwinRoom> response = null;
+        ArrayList<TwinRoom> response = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i) instanceof TwinRoom) {
                 response.add((TwinRoom) rooms.get(i));
@@ -156,7 +161,7 @@ public class HostelRoomController implements Controller {
     }
 
     public ArrayList<PremiumSingleRoom> getPremiumSingleRooms() {
-        ArrayList<PremiumSingleRoom> response = null;
+        ArrayList<PremiumSingleRoom> response = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i) instanceof PremiumSingleRoom) {
                 response.add((PremiumSingleRoom) rooms.get(i));
@@ -169,7 +174,7 @@ public class HostelRoomController implements Controller {
     }
 
     public ArrayList<PremiumTwinRoom> getPremiumTwinRooms() {
-        ArrayList<PremiumTwinRoom> response = null;
+        ArrayList<PremiumTwinRoom> response = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i) instanceof PremiumTwinRoom) {
                 response.add((PremiumTwinRoom) rooms.get(i));
@@ -182,7 +187,7 @@ public class HostelRoomController implements Controller {
     }
 
     public ArrayList<HostelRoom> getAvailableRooms() {
-        ArrayList<HostelRoom> response = null;
+        ArrayList<HostelRoom> response = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).isAvailable()) {
                 response.add((PremiumTwinRoom) rooms.get(i));
