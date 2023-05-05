@@ -64,7 +64,4 @@ public class Reservation{
     public void setcontractPeriodWeeks(int contractPeriodWeeks) {
         this.contractPeriodWeeks = contractPeriodWeeks;
     }
-
-        
-
 }

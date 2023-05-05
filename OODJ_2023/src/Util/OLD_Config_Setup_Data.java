@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  *
  */
-public class Config_Setup_Data {
+public class OLD_Config_Setup_Data {
 
     private ArrayList<Facility> facilities = new ArrayList<>();
     private ArrayList<Facility> facilities2 = new ArrayList<>();
@@ -138,7 +138,7 @@ public class Config_Setup_Data {
         File folder = new File("data");
         if(!folder.exists() && !folder.isDirectory()){
             folder.mkdirs();
-            Config_Setup_Data config = new Config_Setup_Data();
+            OLD_Config_Setup_Data config = new OLD_Config_Setup_Data();
             config.TempUserData();
             config.TempHostelData();
             config.TempApplicationData();

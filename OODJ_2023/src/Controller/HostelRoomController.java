@@ -1,18 +1,20 @@
 package Controller;
 
+import Model.Enum.Facility;
+import Model.Enum.RoomType;
 import Model.HostelRoom;
 import Model.HostelSubClass.PremiumSingleRoom;
 import Model.HostelSubClass.PremiumTwinRoom;
 import Model.HostelSubClass.SingleRoom;
 import Model.HostelSubClass.TwinRoom;
 import Util.FileName;
+import Util.FileUtil;
 import Util.SerializationUtil;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class HostelRoomController implements Controller {
 
-    ArrayList<HostelRoom> rooms;
+    private ArrayList<HostelRoom> rooms;
     private static HostelRoomController roomController;
 
     public static HostelRoomController ActivateHostelRoomController() {
@@ -24,30 +26,85 @@ public class HostelRoomController implements Controller {
 
     HostelRoomController() {
         this.rooms = new ArrayList<>();
-        rooms = (ArrayList<HostelRoom>) SerializationUtil.readObjectFromFile(FileName.ROOM);
+        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.ROOM);
+        textRecords.forEach(record -> {
+            HostelRoom loadedObject = fromTextToObject(record);
+            rooms.add(loadedObject);
+        });
     }
-    
-    private int generateUniqueNumber(int num){
+
+    private HostelRoom fromTextToObject(String[] splittedLine) {
+        HostelRoom response = null;
+        int roomID = Integer.parseInt(splittedLine[0]);
+        RoomType type = RoomType.valueOf(splittedLine[1]);
+        boolean available = Boolean.parseBoolean(splittedLine[2]);
+        int capacity = Integer.parseInt(splittedLine[3]);
+        String formatFacilityText = splittedLine[4].substring(1, splittedLine[4].length() - 1);
+        String[] eachFacilityText = formatFacilityText.split(",");
+        ArrayList<Facility> facilities = new ArrayList<>();
+        for (String s : eachFacilityText) {
+            facilities.add(Facility.valueOf(s));
+        }
+        double price = Double.parseDouble(splittedLine[5]);
+        switch (type) {
+            case SINGLE:
+                response = new SingleRoom(roomID, available, capacity, facilities);
+            case TWIN:
+                response = new TwinRoom(roomID, available, capacity, facilities);
+            case PREMIUMSINGLE:
+                response = new PremiumSingleRoom(roomID, available, capacity, facilities);
+            case PREMIUMTWIN:
+                response = new PremiumTwinRoom(roomID, available, capacity, facilities);
+        }
+        return response;
+    }
+
+    private ArrayList<String> fromObjectToText() {
+        ArrayList<String> fileContents = new ArrayList<>();
+        rooms.forEach(room -> {
+            switch (room.getClass().getSimpleName()) {
+                case "SingleRoom" -> {
+                    SingleRoom r = (SingleRoom) room;
+                    fileContents.add(r.getRoomID() + ";" + r.getType() + ";" + r.isAvailable() + ";" + r.getCapacity() + ";" + r.getFacilities() + ";" + r.getRoomPrice());
+                }
+                case "TwinRoom" -> {
+                    TwinRoom r = (TwinRoom) room;
+                    fileContents.add(r.getRoomID() + ";" + r.getType() + ";" + r.isAvailable() + ";" + r.getCapacity() + ";" + r.getFacilities() + ";" + r.getRoomPrice());
+                }
+                case "PremiumSingleRoom" -> {
+                    PremiumSingleRoom r = (PremiumSingleRoom) room;
+                    fileContents.add(r.getRoomID() + ";" + r.getType() + ";" + r.isAvailable() + ";" + r.getCapacity() + ";" + r.getFacilities() + ";" + r.getRoomPrice());
+                }
+                case "PremiumTwinRoom" -> {
+                    PremiumTwinRoom r = (PremiumTwinRoom) room;
+                    fileContents.add(r.getRoomID() + ";" + r.getType() + ";" + r.isAvailable() + ";" + r.getCapacity() + ";" + r.getFacilities() + ";" + r.getRoomPrice());
+                }
+            }
+        });
+        return fileContents;
+    }
+
+    private int generateUniqueNumber(int num) {
         return num + 1;
     }
-    
-    private boolean checkIDIsExist(int id){
+
+    private boolean checkIDIsExist(int id) {
         boolean isFound = false;
-        for(HostelRoom room : rooms){
-            if(room.getRoomID()== id){
+        for (HostelRoom room : rooms) {
+            if (room.getRoomID() == id) {
                 isFound = true;
             }
         }
         return isFound;
     }
 
-   @Override
+    @Override
     public int getNewID() {
         int tempNewId = rooms.size() + 1;
         boolean isIDExist = checkIDIsExist(tempNewId);
-        while(isIDExist){
+        while (isIDExist) {
             tempNewId = generateUniqueNumber(tempNewId);
-            if(!checkIDIsExist(tempNewId)){
+            if (!checkIDIsExist(tempNewId)) {
                 break;
             }
         }
@@ -61,7 +118,7 @@ public class HostelRoomController implements Controller {
     public HostelRoom getHostelRoomById(int id) {
         HostelRoom response = null;
         for (int i = 0; i < rooms.size(); i++) {
-            if (rooms.get(i).getRoomID()== id) {
+            if (rooms.get(i).getRoomID() == id) {
                 response = rooms.get(i);
                 break;
             }
@@ -71,11 +128,11 @@ public class HostelRoomController implements Controller {
         }
         return response;
     }
-    
-    public ArrayList<SingleRoom> getSingleRooms(){
+
+    public ArrayList<SingleRoom> getSingleRooms() {
         ArrayList<SingleRoom> response = null;
-        for(int i = 0; i < rooms.size(); i++){
-            if(rooms.get(i) instanceof SingleRoom){
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i) instanceof SingleRoom) {
                 response.add((SingleRoom) rooms.get(i));
             }
         }
@@ -84,11 +141,11 @@ public class HostelRoomController implements Controller {
         }
         return response;
     }
-    
-    public ArrayList<TwinRoom> getTwinRooms(){
+
+    public ArrayList<TwinRoom> getTwinRooms() {
         ArrayList<TwinRoom> response = null;
-        for(int i = 0; i < rooms.size(); i++){
-            if(rooms.get(i) instanceof TwinRoom){
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i) instanceof TwinRoom) {
                 response.add((TwinRoom) rooms.get(i));
             }
         }
@@ -97,11 +154,11 @@ public class HostelRoomController implements Controller {
         }
         return response;
     }
-    
-    public ArrayList<PremiumSingleRoom> getPremiumSingleRooms(){
+
+    public ArrayList<PremiumSingleRoom> getPremiumSingleRooms() {
         ArrayList<PremiumSingleRoom> response = null;
-        for(int i = 0; i < rooms.size(); i++){
-            if(rooms.get(i) instanceof PremiumSingleRoom){
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i) instanceof PremiumSingleRoom) {
                 response.add((PremiumSingleRoom) rooms.get(i));
             }
         }
@@ -110,11 +167,11 @@ public class HostelRoomController implements Controller {
         }
         return response;
     }
-    
-    public ArrayList<PremiumTwinRoom> getPremiumTwinRooms(){
+
+    public ArrayList<PremiumTwinRoom> getPremiumTwinRooms() {
         ArrayList<PremiumTwinRoom> response = null;
-        for(int i = 0; i < rooms.size(); i++){
-            if(rooms.get(i) instanceof PremiumTwinRoom){
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i) instanceof PremiumTwinRoom) {
                 response.add((PremiumTwinRoom) rooms.get(i));
             }
         }
@@ -123,11 +180,11 @@ public class HostelRoomController implements Controller {
         }
         return response;
     }
-    
-    public ArrayList<HostelRoom> getAvailableRooms(){
+
+    public ArrayList<HostelRoom> getAvailableRooms() {
         ArrayList<HostelRoom> response = null;
-        for(int i = 0; i < rooms.size(); i++){
-            if(rooms.get(i).isAvailable()){
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i).isAvailable()) {
                 response.add((PremiumTwinRoom) rooms.get(i));
             }
         }
@@ -136,12 +193,12 @@ public class HostelRoomController implements Controller {
         }
         return response;
     }
-    
-    public ArrayList<?> getAvailableRoomsByClassType(Class<?> classType){
+
+    public ArrayList<?> getAvailableRoomsByClassType(Class<?> classType) {
         ArrayList<HostelRoom> availableRooms = getAvailableRooms();
         ArrayList<HostelRoom> responseRooms = new ArrayList<>();
-        for(int i = 0; i < availableRooms.size(); i++){
-            if(availableRooms.get(i).getClass() == classType){
+        for (int i = 0; i < availableRooms.size(); i++) {
+            if (availableRooms.get(i).getClass() == classType) {
                 responseRooms.add(availableRooms.get(i));
             }
         }
@@ -150,13 +207,13 @@ public class HostelRoomController implements Controller {
         }
         return responseRooms;
     }
-    
-    public void addHostelRoom(HostelRoom room) {
+
+    public void add(HostelRoom room) {
         this.rooms.add(room);
         saveRecords();
     }
 
-    public void updateHostelRoom(HostelRoom room) {
+    public void update(HostelRoom room) {
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).getRoomID() == room.getRoomID()) {
                 rooms.set(i, room);
@@ -165,26 +222,25 @@ public class HostelRoomController implements Controller {
         }
         saveRecords();
     }
-    
-    public void deleteHostelRoom(HostelRoom room){
-        try{
-            if(rooms.remove(room)){
+
+    public void deleteHostelRoom(HostelRoom room) {
+        try {
+            if (rooms.remove(room)) {
                 saveRecords();
-            }
-            else{
+            } else {
                 throw new Exception();
             }
-        }catch (Exception ex){
-            System.out.println("err occured when deleting hostel room.\nerr: "+ ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("err occured when deleting hostel room.\nerr: " + ex.getMessage());
         }
     }
 
     @Override
     public void saveRecords() {
-        SerializationUtil.writeObjectToFile(this.rooms, FileName.ROOM);
+        FileUtil.WriteToFile(FileName.ROOM, fromObjectToText());
     }
-    
- // Testing
+
+    // Testing
 //    public static void main(String[] args) {
 //        HostelRoomController rc = roomController.ActivateHostelRoomController();
 //        

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  *
  */
-public class Application{
+public class Application {
 
     private int applicationID;
     private Student student;
@@ -93,5 +93,8 @@ public class Application{
     public String toString() {
         return "Application{" + "applicationID=" + applicationID + ", student=" + student + ", room=" + room + ", dateTime=" + dateTime + ", payment=" + payment + ", applicationStatus=" + applicationStatus + ", rejectedReason=" + rejectedReason + '}';
     }
-    
+
+    public String toFileContent() {
+        return applicationID + ";" + dateTime + ";" + applicationStatus + ";"  + rejectedReason;
+    }
 }

@@ -73,6 +73,4 @@ public class Payment{
     public void setIsRefunded(boolean isRefunded) {
         this.isRefunded = isRefunded;
     }
-
-    
 }

@@ -4,9 +4,13 @@
  */
 package Controller;
 
+import Model.HostelRoom;
 import Model.Payment;
+import Model.Student;
 import Util.FileName;
+import Util.FileUtil;
 import Util.SerializationUtil;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +18,7 @@ import java.util.ArrayList;
  */
 public class PaymentController implements Controller {
 
-    ArrayList<Payment> payments;
+    private ArrayList<Payment> payments;
     private static PaymentController paymentController;
 
     public static PaymentController ActivatePaymentController() {
@@ -26,7 +30,31 @@ public class PaymentController implements Controller {
 
     PaymentController() {
         this.payments = new ArrayList<>();
-        payments = (ArrayList<Payment>) SerializationUtil.readObjectFromFile(FileName.PAYMENT);
+        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.PAYMENT);
+        textRecords.forEach(record -> {
+            Payment loadedObject = fromTextToObject(record);
+            payments.add(loadedObject);
+        });
+    }
+    
+    private Payment fromTextToObject(String[] splittedLine){
+        int id = Integer.parseInt(splittedLine[0]);
+        double amount = Double.parseDouble(splittedLine[1]);
+        LocalDateTime dt = LocalDateTime.parse(splittedLine[2]);
+        boolean isRefunded = Boolean.parseBoolean(splittedLine[3]);
+        int stuID = Integer.parseInt(splittedLine[4]);
+        int roomID = Integer.parseInt(splittedLine[5]);
+        Student stu = StudentController.ActivateStudentController().getStudentById(stuID);
+        HostelRoom room = HostelRoomController.ActivateHostelRoomController().getHostelRoomById(roomID);
+        return new Payment(id, stu, room, amount, dt, isRefunded);
+    }
+    
+    private ArrayList<String> fromObjectToText(){
+        ArrayList<String> fileContents = new ArrayList<>();
+        payments.forEach(payment -> {
+            fileContents.add(payment.getPaymentID() +";"+ payment.getAmount() +";"+ payment.getDateTime() +";"+ payment.isRefunded() +";"+ payment.getStudent().getStudentID() +";"+ payment.getRoom().getRoomID());
+        });
+        return fileContents;
     }
 
      private int generateUniqueNumber(int num){
@@ -128,7 +156,8 @@ public class PaymentController implements Controller {
 
     @Override
     public void saveRecords() {
-        SerializationUtil.writeObjectToFile(this.payments, FileName.PAYMENT);
+        System.out.println("payments" + payments.toString());
+        FileUtil.WriteToFile(FileName.PAYMENT, fromObjectToText());
     }
 
     // Testing

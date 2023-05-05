@@ -1,13 +1,18 @@
 package Controller;
 
 import Model.Application;
+import Model.Enum.ApplicationStatus;
+import Model.HostelRoom;
+import Model.Payment;
+import Model.Student;
 import Util.FileName;
-import Util.SerializationUtil;
+import Util.FileUtil;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ApplicationController implements Controller {
 
-    ArrayList<Application> applications;
+    private ArrayList<Application> applications;
     private static ApplicationController applicationController;
 
     public static ApplicationController ActivateApplicationController() {
@@ -19,7 +24,33 @@ public class ApplicationController implements Controller {
 
     ApplicationController() {
         this.applications = new ArrayList<>();
-        applications = (ArrayList<Application>) SerializationUtil.readObjectFromFile(FileName.APPLICATION);
+        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.APPLICATION);
+        textRecords.forEach(record -> {
+            Application loadedObject = fromTextToObject(record);
+            applications.add(loadedObject);
+        });
+    }
+    
+    private Application fromTextToObject(String[] splittedLine){
+        int id = Integer.parseInt(splittedLine[0]);
+        LocalDateTime dateTime = LocalDateTime.parse(splittedLine[1]);
+        ApplicationStatus status = ApplicationStatus.valueOf(splittedLine[2]);
+        String rejectedReason = splittedLine[3];
+        int stuID = Integer.parseInt(splittedLine[4]);
+        int roomID = Integer.parseInt(splittedLine[5]);
+        int paymentID = Integer.parseInt(splittedLine[6]);
+        Student studentObject = StudentController.ActivateStudentController().getStudentById(stuID);
+        HostelRoom roomObject = HostelRoomController.ActivateHostelRoomController().getHostelRoomById(roomID);
+        Payment paymentObject = PaymentController.ActivatePaymentController().getPaymentById(paymentID);
+        return new Application(id, studentObject, roomObject, dateTime, paymentObject, status, rejectedReason);
+    }
+    
+    private ArrayList<String> fromObjectToText(){
+        ArrayList<String> fileContents = new ArrayList<>();
+        applications.forEach(application -> {
+            fileContents.add(application.getApplicationID() + ";" + application.getDateTime() + ";" + application.getApplicationStatus() + ";" + application.getRejectedReason() + ";" + application.getStudent().getStudentID() + ";" + application.getRoom().getRoomID() + ";" + application.getPayment().getPaymentID());
+        });
+        return fileContents;
     }
     
     private int generateUniqueNumber(int num){
@@ -98,7 +129,8 @@ public class ApplicationController implements Controller {
 
     @Override
     public void saveRecords() {
-        SerializationUtil.writeObjectToFile(this.applications, FileName.APPLICATION);
+        System.out.println("applications: " + applications.toString());
+        FileUtil.WriteToFile(FileName.APPLICATION, fromObjectToText());
     }
 
     // Testing

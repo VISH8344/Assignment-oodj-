@@ -6,7 +6,7 @@ import Model.User;
 import UI.LoginPage;
 import UI.RegisterPage;
 import UI.WelcomePage;
-import Util.Config_Setup_Data;
+import Util.OLD_Config_Setup_Data;
 
 public class OODJ_2023 {
 
@@ -19,7 +19,7 @@ public class OODJ_2023 {
 //    public static RegisterPage rp = new RegisterPage();
 
     private void initialize() {
-        Config_Setup_Data.InitializeData();
+        OLD_Config_Setup_Data.InitializeData();
         wp.setVisible(true);
     }
 

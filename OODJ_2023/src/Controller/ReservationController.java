@@ -1,8 +1,10 @@
 package Controller;
 
+import Model.Application;
 import Model.Reservation;
 import Util.FileName;
-import Util.SerializationUtil;
+import Util.FileUtil;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReservationController implements Controller {
@@ -19,17 +21,39 @@ public class ReservationController implements Controller {
 
     ReservationController() {
         this.reservations = new ArrayList<>();
-        reservations = (ArrayList<Reservation>) SerializationUtil.readObjectFromFile(FileName.RESERVATION);
+        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.RESERVATION);
+        textRecords.forEach(record -> {
+            Reservation loadedObject = fromTextToObject(record);
+            reservations.add(loadedObject);
+        });
     }
 
-    private int generateUniqueNumber(int num){
+    private Reservation fromTextToObject(String[] splittedLine) {
+        int id = Integer.parseInt(splittedLine[0]);
+        LocalDateTime checkIn = LocalDateTime.parse(splittedLine[1]);
+        LocalDateTime checkOut = LocalDateTime.parse(splittedLine[2]);
+        int contract = Integer.parseInt(splittedLine[3]);
+        int applicationID = Integer.parseInt(splittedLine[4]);
+        Application application = ApplicationController.ActivateApplicationController().getApplicationById(applicationID);
+        return new Reservation(id, application, checkIn, checkOut, contract);
+    }
+
+    private ArrayList<String> fromObjectToText() {
+        ArrayList<String> fileContents = new ArrayList<>();
+        reservations.forEach(re -> {
+            fileContents.add(re.getReservationID() + ";" + re.getCheckInDateTime() + ";" + re.getCheckOutDateTime() + ";" + re.getcontractPeriodWeeks());
+        });
+        return fileContents;
+    }
+
+    private int generateUniqueNumber(int num) {
         return num + 1;
     }
-    
-    private boolean checkIDIsExist(int id){
+
+    private boolean checkIDIsExist(int id) {
         boolean isFound = false;
-        for(Reservation reservation : reservations){
-            if(reservation.getReservationID()== id){
+        for (Reservation reservation : reservations) {
+            if (reservation.getReservationID() == id) {
                 isFound = true;
             }
         }
@@ -40,9 +64,9 @@ public class ReservationController implements Controller {
     public int getNewID() {
         int tempNewId = reservations.size() + 1;
         boolean isIDExist = checkIDIsExist(tempNewId);
-        while(isIDExist){
+        while (isIDExist) {
             tempNewId = generateUniqueNumber(tempNewId);
-            if(!checkIDIsExist(tempNewId)){
+            if (!checkIDIsExist(tempNewId)) {
                 break;
             }
         }
@@ -56,13 +80,13 @@ public class ReservationController implements Controller {
     public Reservation getReservationById(int id) {
         Reservation response = null;
         for (int i = 0; i < reservations.size(); i++) {
-            if (reservations.get(i).getReservationID()== id) {
+            if (reservations.get(i).getReservationID() == id) {
                 response = reservations.get(i);
                 break;
             }
         }
         if (response == null) {
-                System.out.println("Reservation with this id : " + id + " is not found");
+            System.out.println("Reservation with this id : " + id + " is not found");
         }
         return response;
     }
@@ -70,18 +94,18 @@ public class ReservationController implements Controller {
     public Reservation getReservationByStudentID(int studentID) {
         Reservation response = null;
         for (int i = 0; i < reservations.size(); i++) {
-            if (reservations.get(i).getApplication().getStudent().getStudentID()== studentID) {
+            if (reservations.get(i).getApplication().getStudent().getStudentID() == studentID) {
                 response = reservations.get(i);
                 break;
             }
         }
         if (response == null) {
-                System.out.println("Reservation with this studentID : " + studentID + " is not found");
+            System.out.println("Reservation with this studentID : " + studentID + " is not found");
         }
         return response;
     }
 
-    public void addReservation(Reservation Reservation) {
+    public void add(Reservation Reservation) {
         this.reservations.add(Reservation);
         saveRecords();
     }
@@ -98,7 +122,8 @@ public class ReservationController implements Controller {
 
     @Override
     public void saveRecords() {
-        SerializationUtil.writeObjectToFile(this.reservations, FileName.RESERVATION);
+        System.out.println("reservations: "+ reservations.toString());
+        FileUtil.WriteToFile(FileName.RESERVATION, fromObjectToText());
     }
 
     // Testing

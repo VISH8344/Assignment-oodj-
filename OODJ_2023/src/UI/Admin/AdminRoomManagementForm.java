@@ -404,7 +404,7 @@ public class AdminRoomManagementForm extends javax.swing.JFrame {
                 this.dispose();
                 return;
             }
-            hc.addHostelRoom(newHostelRoom);
+            hc.add(newHostelRoom);
             this.dispose();
             JOptionPane.showMessageDialog(this, "Room added successfully", "Halo",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -417,25 +417,25 @@ public class AdminRoomManagementForm extends javax.swing.JFrame {
                     SingleRoom singleRoom = (SingleRoom) room;
                     singleRoom.setCapacity(singleRoom.getCapacity());
                     singleRoom.setFacilities(selectedFacilities);
-                    hc.updateHostelRoom(singleRoom);
+                    hc.update(singleRoom);
                 }
                 case "TwinRoom" -> {
                     TwinRoom twinRoom = (TwinRoom) room;
                     twinRoom.setCapacity(twinRoom.getCapacity());
                     twinRoom.setFacilities(selectedFacilities);
-                    hc.updateHostelRoom(twinRoom);
+                    hc.update(twinRoom);
                 }
                 case "PremiumSingleRoom" -> {
                     PremiumSingleRoom pmSingleRoom = (PremiumSingleRoom) room;
                     pmSingleRoom.setCapacity(pmSingleRoom.getCapacity());
                     pmSingleRoom.setFacilities(selectedFacilities);
-                    hc.updateHostelRoom(pmSingleRoom);
+                    hc.update(pmSingleRoom);
                 }
                 case "PremiumTwinRoom" -> {
                     PremiumTwinRoom pmTwinRoom = (PremiumTwinRoom) room;
                     pmTwinRoom.setCapacity(pmTwinRoom.getCapacity());
                     pmTwinRoom.setFacilities(selectedFacilities);
-                    hc.updateHostelRoom(pmTwinRoom);
+                    hc.update(pmTwinRoom);
                 }
             }
             this.dispose();

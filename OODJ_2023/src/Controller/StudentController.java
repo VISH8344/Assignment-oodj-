@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Student;
 import Util.FileName;
+import Util.FileUtil;
 import Util.SerializationUtil;
 import java.util.ArrayList;
 
@@ -19,7 +20,31 @@ public class StudentController implements Controller {
 
     StudentController() {
         this.students = new ArrayList<>();
-        students = (ArrayList<Student>) SerializationUtil.readObjectFromFile(FileName.STUDENT);
+        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.RESERVATION);
+        textRecords.forEach(record -> {
+            Student loadedObject = fromTextToObject(record);
+            students.add(loadedObject);
+        });
+    }
+    
+    private Student fromTextToObject(String[] splittedLine) {
+        int id = Integer.parseInt(splittedLine[0]);
+        String name = splittedLine[1];
+        String nic = splittedLine[2];
+        String address = splittedLine[3];
+        String gender = splittedLine[4];
+        double balance = Double.parseDouble(splittedLine[5]);
+        String userName = splittedLine[6];
+        String pw = splittedLine[7];
+        return new Student(id, name, nic, address, gender, balance, userName, pw);
+    }
+
+    private ArrayList<String> fromObjectToText() {
+        ArrayList<String> fileContents = new ArrayList<>();
+        students.forEach(stu -> {
+            fileContents.add(stu.getStudentID() + ";" + stu.getName() + ";" + stu.getNIC() + ";" + stu.getAddress() + ";" + stu.getBalance() + ";" + stu.getUsername() + ";" + stu.getPassword());
+        });
+        return fileContents;
     }
 
     private int generateUniqueNumber(int num){
@@ -81,7 +106,7 @@ public class StudentController implements Controller {
         return response;
     }
 
-    public void addStudent(Student student) {
+    public void add(Student student) {
         this.students.add(student);
         saveRecords();
     }
@@ -98,7 +123,7 @@ public class StudentController implements Controller {
 
     @Override
     public void saveRecords() {
-        SerializationUtil.writeObjectToFile(this.students, FileName.STUDENT);
+        FileUtil.WriteToFile(FileName.STUDENT, fromObjectToText());
     }
 
     // Testing
@@ -111,7 +136,7 @@ public class StudentController implements Controller {
 ////        System.out.println(sc.getNewID());
 //        System.out.println(sc.getStudentById(1));
 //        System.out.println(sc.getStudentByUsername("cindy223"));
-////        sc.addStudent(new Student(2, "stu2", "", "", "",4.0,"",""));
+////        sc.add(new Student(2, "stu2", "", "", "",4.0,"",""));
 ////        sc.updateStudent(new Student(2, "halo", "", "", "",4.0,"",""));
 ////        System.out.println(sc.getStudentById(2));
 //    }

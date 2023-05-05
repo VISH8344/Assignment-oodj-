@@ -16,6 +16,7 @@ import java.util.ArrayList;
  *
  */
 public class FileUtil {
+
     public static boolean createFile(String filePath) {
         File file = new File(filePath);
         try {
@@ -25,42 +26,44 @@ public class FileUtil {
         }
         return false;
     }
-    
-    public static ArrayList<String[]> ReadFile(String filePath){
-        File file = new File(filePath);
+
+    public static ArrayList<String[]> ReadFile(String fileName) {
+        String filePath = "data/" + fileName;
         ArrayList<String[]> fileRecords = new ArrayList<>();
-        if(!file.exists()){
-            try{
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
                 file.createNewFile();
-                System.out.println("file with this path: " + filePath + "isn't found.");
-                System.out.println("file with this path: " + filePath + "isn't found.");
-            }
-            catch(IOException e){
+                System.out.println("file with this path: " + filePath + "isn't found. creating file...");
+            } catch (IOException e) {
                 System.out.println("err occured when creating file: " + e.getMessage());
             }
         }
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String fileContents = br.readLine();
-            while(fileContents != null){
+            while (fileContents != null) {
                 String[] eachLine = fileContents.split(";");
                 fileRecords.add(eachLine);
             }
-        }
-        catch (IOException e){
-            System.out.println("err occured when reading this file " + filePath +"\nerr: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("err occured when reading this file " + filePath + "\nerr: " + e.getMessage());
         }
         return fileRecords;
     }
-    
-    public static void WriteToFile(String filePath, ArrayList<String> contents){
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
-            for (String line: contents){
+
+    public static void WriteToFile(String fileName, ArrayList<String> contents) {
+        String filePath = "data/" + fileName;
+        boolean isFileExist = new File(filePath).isFile();
+        if (!isFileExist) {
+            FileUtil.createFile(filePath);
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (String line : contents) {
                 bw.write(line);
                 bw.newLine();
             }
-        }
-        catch(IOException e){
-            System.out.println("err occured when writing to this file:  "+ filePath +"\nerr: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("err occured when writing to this file:  " + filePath + "\nerr: " + e.getMessage());
         }
     }
 }

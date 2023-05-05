@@ -17,7 +17,5 @@ public class Admin  extends User{
    public UserRole getUserRole(){
         return this.u_role;
     }
-    public String toFileContent(){
-        return this.getUsername() + ";" + this.getPassword();
-    }
+   
 }
