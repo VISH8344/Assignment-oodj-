@@ -1,1 +1,1 @@
-1;Cindy;0211221122;3, Jalan Jagong, Taman Bunga;1000.0;cindy223;123
+1;Cindy;0211221122;FEMALE;3, Jalan Jagong, Taman Bunga;1000.0;cindy223;123

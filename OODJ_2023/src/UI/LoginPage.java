@@ -206,13 +206,13 @@ public class LoginPage extends javax.swing.JFrame {
                 }
 
                 if (userExist) {
-                    JOptionPane.showMessageDialog(loginpage, "Login Successful!");
+                    this.setVisible(false);
                     uname_field.setText("");
                     pass_field.setText("");
-                    this.setVisible(false);
                     if (this.role == UserRole.ADMIN) {
                         AdminHomePage adminhp = new AdminHomePage();
                         adminhp.setVisible(true);
+                        JOptionPane.showMessageDialog(loginpage, "Login Successful!");
                     }
                     if (this.role == UserRole.STUDENT) {
                         MainPage mp = new MainPage();

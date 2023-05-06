@@ -25,7 +25,7 @@ public class StudentController implements Controller {
             students.add(loadedObject);
         });
     }
-    
+
     private Student fromTextToObject(String[] splittedLine) {
         int id = Integer.parseInt(splittedLine[0]);
         String name = splittedLine[1];
@@ -41,19 +41,19 @@ public class StudentController implements Controller {
     private ArrayList<String> fromObjectToText() {
         ArrayList<String> fileContents = new ArrayList<>();
         students.forEach(stu -> {
-            fileContents.add(stu.getStudentID() + ";" + stu.getName() + ";" + stu.getNIC() + ";" + stu.getAddress() + ";" + stu.getBalance() + ";" + stu.getUsername() + ";" + stu.getPassword());
+            fileContents.add(stu.getStudentID() + ";" + stu.getName() + ";" + stu.getNIC() + ";" + stu.getGender() + ";" + stu.getAddress() + ";" + stu.getBalance() + ";" + stu.getUsername() + ";" + stu.getPassword());
         });
         return fileContents;
     }
 
-    private int generateUniqueNumber(int num){
+    private int generateUniqueNumber(int num) {
         return num + 1;
     }
-    
-    private boolean checkIDIsExist(int id){
+
+    private boolean checkIDIsExist(int id) {
         boolean isFound = false;
-        for(Student stu : students){
-            if(stu.getStudentID()== id){
+        for (Student stu : students) {
+            if (stu.getStudentID() == id) {
                 isFound = true;
             }
         }
@@ -64,9 +64,9 @@ public class StudentController implements Controller {
     public int getNewID() {
         int tempNewId = students.size() + 1;
         boolean isIDExist = checkIDIsExist(tempNewId);
-        while(isIDExist){
+        while (isIDExist) {
             tempNewId = generateUniqueNumber(tempNewId);
-            if(!checkIDIsExist(tempNewId)){
+            if (!checkIDIsExist(tempNewId)) {
                 break;
             }
         }
@@ -80,13 +80,13 @@ public class StudentController implements Controller {
     public Student getStudentById(int id) {
         Student response = null;
         for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getStudentID()== id) {
+            if (students.get(i).getStudentID() == id) {
                 response = students.get(i);
                 break;
             }
         }
         if (response == null) {
-                System.out.println("Student with this id : " + id + " is not found");
+            System.out.println("Student with this id : " + id + " is not found");
         }
         return response;
     }
@@ -100,7 +100,7 @@ public class StudentController implements Controller {
             }
         }
         if (response == null) {
-                System.out.println("Student with this username : " + userName + " is not found");
+            System.out.println("Student with this username : " + userName + " is not found");
         }
         return response;
     }
