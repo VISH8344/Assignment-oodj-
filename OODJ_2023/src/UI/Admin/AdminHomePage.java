@@ -233,6 +233,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void ApplicationManagementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplicationManagementBtnActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        AdminApplicationManagement.activateUI().setVisible(true);
     }//GEN-LAST:event_ApplicationManagementBtnActionPerformed
 
     private void RecordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordBtnActionPerformed

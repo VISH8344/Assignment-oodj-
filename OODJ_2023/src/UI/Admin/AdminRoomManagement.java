@@ -24,11 +24,11 @@ public class AdminRoomManagement extends javax.swing.JFrame {
 
     private ArrayList<?> rooms = new ArrayList<>();
     private static RoomType type;
-    
+
     private static AdminRoomManagement roomManagementUI;
-    
-    public static AdminRoomManagement activateUI(){
-        if(AdminRoomManagement.roomManagementUI == null){
+
+    public static AdminRoomManagement activateUI() {
+        if (AdminRoomManagement.roomManagementUI == null) {
             AdminRoomManagement.roomManagementUI = new AdminRoomManagement();
         }
         return AdminRoomManagement.roomManagementUI;
@@ -40,30 +40,44 @@ public class AdminRoomManagement extends javax.swing.JFrame {
     public AdminRoomManagement() {
         initComponents();
 //        switchRoomType(RoomType.SINGLE);
-        rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
+        resetRooms();
         generateRoomCard();
         typeTitleLabel.setText("ALL");
         setLocationRelativeTo(null);
     }
-    
-    public void resetRooms(){
-        if(null == type){
+
+    private void generateRoomCard() {
+        JPanel panel = new JPanel();
+        int height = 130 * rooms.size();
+        panel.setPreferredSize(new Dimension(843, height));
+
+        rooms.forEach(room -> {
+            RoomCard roomCard = new RoomCard((HostelRoom) room);
+            panel.add(roomCard.roomCard());
+        });
+        roomCardsPanel.getViewport().add(panel);
+    }
+
+    public void resetRooms() {
+        if (null == type) {
             rooms = HostelRoomController.ActivateHostelRoomController().getHostelRooms();
-        } else switch (type) {
-            case SINGLE:
-                rooms = HostelRoomController.ActivateHostelRoomController().getSingleRooms();
-                break;
-            case TWIN:
-                rooms = HostelRoomController.ActivateHostelRoomController().getTwinRooms();
-                break;
-            case PREMIUMSINGLE:
-                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
-                break;
-            case PREMIUMTWIN:
-                rooms = HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
-                break;
-            default:
-                break;
+        } else {
+            switch (type) {
+                case SINGLE:
+                    rooms = HostelRoomController.ActivateHostelRoomController().getSingleRooms();
+                    break;
+                case TWIN:
+                    rooms = HostelRoomController.ActivateHostelRoomController().getTwinRooms();
+                    break;
+                case PREMIUMSINGLE:
+                    rooms = HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
+                    break;
+                case PREMIUMTWIN:
+                    rooms = HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
+                    break;
+                default:
+                    break;
+            }
         }
         generateRoomCard();
     }
@@ -214,18 +228,14 @@ public class AdminRoomManagement extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(typeTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(typeTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(singleRoomFilterBtn)
                     .addComponent(twinRoomFilterBtn)
@@ -298,30 +308,21 @@ public class AdminRoomManagement extends javax.swing.JFrame {
     private void switchRoomType(RoomType room_type) {
         AdminRoomManagement.type = room_type;
         switch (room_type) {
-            case SINGLE -> rooms = (ArrayList<SingleRoom>) HostelRoomController.ActivateHostelRoomController().getSingleRooms();
-            case TWIN -> rooms = (ArrayList<TwinRoom>) HostelRoomController.ActivateHostelRoomController().getTwinRooms();
-            case PREMIUMSINGLE -> rooms = (ArrayList<PremiumSingleRoom>) HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
-            case PREMIUMTWIN -> rooms = (ArrayList<PremiumTwinRoom>) HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
+            case SINGLE ->
+                rooms = (ArrayList<SingleRoom>) HostelRoomController.ActivateHostelRoomController().getSingleRooms();
+            case TWIN ->
+                rooms = (ArrayList<TwinRoom>) HostelRoomController.ActivateHostelRoomController().getTwinRooms();
+            case PREMIUMSINGLE ->
+                rooms = (ArrayList<PremiumSingleRoom>) HostelRoomController.ActivateHostelRoomController().getPremiumSingleRooms();
+            case PREMIUMTWIN ->
+                rooms = (ArrayList<PremiumTwinRoom>) HostelRoomController.ActivateHostelRoomController().getPremiumTwinRooms();
         }
         generateRoomCard();
-    }
-    
-    private void generateRoomCard(){
-        JPanel panel = new JPanel();
-        int height = 130 * rooms.size();
-        panel.setPreferredSize(new Dimension(843, height));
-
-        rooms.forEach(room -> {
-            RoomCard roomCard = new RoomCard((HostelRoom) room);
-            panel.add(roomCard.roomCard());
-        });
-        roomCardsPanel.getViewport().add(panel);
     }
 
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRoomBtn;

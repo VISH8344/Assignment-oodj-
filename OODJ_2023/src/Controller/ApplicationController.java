@@ -30,8 +30,8 @@ public class ApplicationController implements Controller {
             applications.add(loadedObject);
         });
     }
-    
-    private Application fromTextToObject(String[] splittedLine){
+
+    private Application fromTextToObject(String[] splittedLine) {
         int id = Integer.parseInt(splittedLine[0]);
         LocalDateTime dateTime = LocalDateTime.parse(splittedLine[1]);
         ApplicationStatus status = ApplicationStatus.valueOf(splittedLine[2]);
@@ -44,23 +44,30 @@ public class ApplicationController implements Controller {
         Payment paymentObject = PaymentController.ActivatePaymentController().getPaymentById(paymentID);
         return new Application(id, studentObject, roomObject, dateTime, paymentObject, status, rejectedReason);
     }
-    
-    private ArrayList<String> fromObjectToText(){
+
+    private ArrayList<String> fromObjectToText() {
         ArrayList<String> fileContents = new ArrayList<>();
         applications.forEach(application -> {
-            fileContents.add(application.getApplicationID() + ";" + application.getDateTime() + ";" + application.getApplicationStatus() + ";" + application.getRejectedReason() + ";" + application.getStudent().getStudentID() + ";" + application.getRoom().getRoomID() + ";" + application.getPayment().getPaymentID());
+            fileContents.add(
+                    application.getApplicationID() + ";"
+                    + application.getDateTime() + ";"
+                    + application.getApplicationStatus() + ";"
+                    + application.getRejectedReason() + ";"
+                    + application.getStudent().getStudentID() + ";"
+                    + application.getRoom().getRoomID() + ";"
+                    + application.getPayment().getPaymentID());
         });
         return fileContents;
     }
-    
-    private int generateUniqueNumber(int num){
+
+    private int generateUniqueNumber(int num) {
         return num + 1;
     }
-    
-    private boolean checkIDIsExist(int id){
+
+    private boolean checkIDIsExist(int id) {
         boolean isFound = false;
-        for(Application ap : applications){
-            if(ap.getApplicationID() == id){
+        for (Application ap : applications) {
+            if (ap.getApplicationID() == id) {
                 isFound = true;
             }
         }
@@ -71,9 +78,9 @@ public class ApplicationController implements Controller {
     public int getNewID() {
         int tempNewId = applications.size() + 1;
         boolean isIDExist = checkIDIsExist(tempNewId);
-        while(isIDExist){
+        while (isIDExist) {
             tempNewId = generateUniqueNumber(tempNewId);
-            if(!checkIDIsExist(tempNewId)){
+            if (!checkIDIsExist(tempNewId)) {
                 break;
             }
         }
@@ -101,7 +108,7 @@ public class ApplicationController implements Controller {
     public Application getApplicationByStudentID(int stuID) {
         Application response = null;
         for (int i = 0; i < applications.size(); i++) {
-            if (applications.get(i).getStudent().getStudentID()== stuID) {
+            if (applications.get(i).getStudent().getStudentID() == stuID) {
                 response = applications.get(i);
                 break;
             }
@@ -141,6 +148,4 @@ public class ApplicationController implements Controller {
 //        });
 ////        System.out.println(stuController.getNewID());
 //    }
-
-   
 }

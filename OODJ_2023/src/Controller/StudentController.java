@@ -30,8 +30,8 @@ public class StudentController implements Controller {
         int id = Integer.parseInt(splittedLine[0]);
         String name = splittedLine[1];
         String nic = splittedLine[2];
-        String address = splittedLine[3];
-        String gender = splittedLine[4];
+        String gender = splittedLine[3];
+        String address = splittedLine[4];
         double balance = Double.parseDouble(splittedLine[5]);
         String userName = splittedLine[6];
         String pw = splittedLine[7];
@@ -41,7 +41,15 @@ public class StudentController implements Controller {
     private ArrayList<String> fromObjectToText() {
         ArrayList<String> fileContents = new ArrayList<>();
         students.forEach(stu -> {
-            fileContents.add(stu.getStudentID() + ";" + stu.getName() + ";" + stu.getNIC() + ";" + stu.getGender() + ";" + stu.getAddress() + ";" + stu.getBalance() + ";" + stu.getUsername() + ";" + stu.getPassword());
+            fileContents.add(
+                    stu.getStudentID() + ";"
+                    + stu.getName() + ";"
+                    + stu.getNIC() + ";"
+                    + stu.getGender() + ";"
+                    + stu.getAddress() + ";"
+                    + stu.getBalance() + ";"
+                    + stu.getUsername() + ";"
+                    + stu.getPassword());
         });
         return fileContents;
     }
