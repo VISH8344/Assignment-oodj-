@@ -41,7 +41,12 @@ public class ReservationController implements Controller {
     private ArrayList<String> fromObjectToText() {
         ArrayList<String> fileContents = new ArrayList<>();
         reservations.forEach(re -> {
-            fileContents.add(re.getReservationID() + ";" + re.getCheckInDateTime() + ";" + re.getCheckOutDateTime() + ";" + re.getcontractPeriodWeeks());
+            fileContents.add(
+                    re.getReservationID() + ";"
+                    + re.getCheckInDateTime() + ";"
+                    + re.getCheckOutDateTime()
+                    + ";" + re.getcontractPeriodWeeks()
+                    + ";" + re.getApplication().getApplicationID());
         });
         return fileContents;
     }
@@ -122,7 +127,7 @@ public class ReservationController implements Controller {
 
     @Override
     public void saveRecords() {
-        System.out.println("reservations: "+ reservations.toString());
+        System.out.println("reservations: " + reservations.toString());
         FileUtil.WriteToFile(FileName.RESERVATION, fromObjectToText());
     }
 

@@ -52,6 +52,11 @@ public class ApplicationCard extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         viewDetailBtn.setText("View Detail");
+        viewDetailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewDetailBtnActionPerformed(evt);
+            }
+        });
 
         dateTimeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dateTimeLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -126,6 +131,13 @@ public class ApplicationCard extends javax.swing.JPanel {
                 .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewDetailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailBtnActionPerformed
+        // TODO add your handling code here:
+        AdminApplicationManagementForm aamf = new AdminApplicationManagementForm();
+        aamf.setApplication(this.application);
+        aamf.setVisible(true);
+    }//GEN-LAST:event_viewDetailBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
