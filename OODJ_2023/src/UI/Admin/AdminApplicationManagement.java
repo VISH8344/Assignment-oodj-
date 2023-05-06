@@ -42,6 +42,9 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
 
         // set initial data
         typeTitleLabel.setText("ALL");
+        
+        //extra feature
+        dateTimeArrangeBtn.setVisible(false);
     }
 
     private void generateApplicationCard() {
