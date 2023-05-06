@@ -19,7 +19,7 @@ public class StudentController implements Controller {
 
     StudentController() {
         this.students = new ArrayList<>();
-        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.RESERVATION);
+        ArrayList<String[]> textRecords = FileUtil.ReadFile(FileName.STUDENT);
         textRecords.forEach(record -> {
             Student loadedObject = fromTextToObject(record);
             students.add(loadedObject);

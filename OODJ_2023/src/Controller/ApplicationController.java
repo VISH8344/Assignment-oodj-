@@ -118,6 +118,45 @@ public class ApplicationController implements Controller {
         }
         return response;
     }
+    
+    public ArrayList<Application> getPendingApplications(){
+        ArrayList<Application> response = new ArrayList<>();
+        for (int i = 0; i < applications.size(); i++) {
+            if(applications.get(i).getApplicationStatus() == ApplicationStatus.PENDING){
+                response.add(applications.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("There is no pending applications in the record.");
+        }
+        return response;
+    }
+    
+    public ArrayList<Application> getApprovedApplications(){
+        ArrayList<Application> response = new ArrayList<>();
+        for (int i = 0; i < applications.size(); i++) {
+            if(applications.get(i).getApplicationStatus() == ApplicationStatus.APPROVED){
+                response.add(applications.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("There is no approved applications in the record.");
+        }
+        return response;
+    }
+    
+    public ArrayList<Application> getRejectedApplications(){
+        ArrayList<Application> response = new ArrayList<>();
+        for (int i = 0; i < applications.size(); i++) {
+            if(applications.get(i).getApplicationStatus() == ApplicationStatus.REJECTED){
+                response.add(applications.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("There is no rejected applications in the record.");
+        }
+        return response;
+    }
 
     public void add(Application Application) {
         this.applications.add(Application);

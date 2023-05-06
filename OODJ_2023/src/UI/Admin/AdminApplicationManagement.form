@@ -67,7 +67,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="rejectedFilterBtn" min="-2" pref="104" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="dateTimeArrangeBtn" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Component id="dateTimeArrangeBtn" min="-2" pref="170" max="-2" attributes="0"/>
                       </Group>
                       <Component id="applicationCardScrollPane" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -169,16 +169,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pending"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pendingFilterBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="approvedFilterBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Approved"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="approvedFilterBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="rejectedFilterBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Rejected"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rejectedFilterBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="dateTimeArrangeBtn">
           <Properties>
@@ -190,6 +199,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="DateTime &lt;--&gt;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dateTimeArrangeBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="typeTitleLabel">
           <Properties>

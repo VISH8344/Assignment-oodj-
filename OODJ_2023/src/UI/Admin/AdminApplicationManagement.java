@@ -6,6 +6,7 @@ package UI.Admin;
 
 import Controller.ApplicationController;
 import Model.Application;
+import Model.Enum.ApplicationStatus;
 import UI.WelcomePage;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
 
     private ArrayList<Application> applications = new ArrayList<>();
 
+    private static ApplicationStatus status;
     private static AdminApplicationManagement applicationManagementUI;
 
     public static AdminApplicationManagement activateUI() {
@@ -37,6 +39,9 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
         // get data and generate card component
         resetApplications();
         generateApplicationCard();
+
+        // set initial data
+        typeTitleLabel.setText("ALL");
     }
 
     private void generateApplicationCard() {
@@ -52,7 +57,18 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
     }
 
     public void resetApplications() {
-        this.applications = ApplicationController.ActivateApplicationController().getApplications();
+        if (status == null) {
+            this.applications = ApplicationController.ActivateApplicationController().getApplications();
+        } else {
+            switch (status) {
+                case APPROVED -> applications = ApplicationController.ActivateApplicationController().getApprovedApplications();
+                case REJECTED -> applications = ApplicationController.ActivateApplicationController().getRejectedApplications();
+                case PENDING -> applications = ApplicationController.ActivateApplicationController().getPendingApplications();
+                default -> {
+                }
+            }
+        }
+        generateApplicationCard();
     }
 
     /**
@@ -114,14 +130,34 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
         applicationCardScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         pendingFilterBtn.setText("Pending");
+        pendingFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pendingFilterBtnActionPerformed(evt);
+            }
+        });
 
         approvedFilterBtn.setText("Approved");
+        approvedFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approvedFilterBtnActionPerformed(evt);
+            }
+        });
 
         rejectedFilterBtn.setText("Rejected");
+        rejectedFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rejectedFilterBtnActionPerformed(evt);
+            }
+        });
 
         dateTimeArrangeBtn.setBackground(new java.awt.Color(204, 255, 204));
         dateTimeArrangeBtn.setForeground(new java.awt.Color(0, 0, 0));
         dateTimeArrangeBtn.setText("DateTime <-->");
+        dateTimeArrangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateTimeArrangeBtnActionPerformed(evt);
+            }
+        });
 
         typeTitleLabel.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         typeTitleLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -142,7 +178,7 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rejectedFilterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dateTimeArrangeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dateTimeArrangeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(applicationCardScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +238,31 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
         AdminHomePage ahp = new AdminHomePage();
         ahp.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void pendingFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingFilterBtnActionPerformed
+        // TODO add your handling code here:
+        typeTitleLabel.setText("Pending applications");
+        status = ApplicationStatus.PENDING;
+        resetApplications();
+    }//GEN-LAST:event_pendingFilterBtnActionPerformed
+
+    private void approvedFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvedFilterBtnActionPerformed
+        // TODO add your handling code here
+        typeTitleLabel.setText("Approved applications");
+        status = ApplicationStatus.APPROVED;
+        resetApplications();
+    }//GEN-LAST:event_approvedFilterBtnActionPerformed
+
+    private void rejectedFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectedFilterBtnActionPerformed
+        // TODO add your handling code here:
+        typeTitleLabel.setText("Rejected applications");
+        status = ApplicationStatus.REJECTED;
+        resetApplications();
+    }//GEN-LAST:event_rejectedFilterBtnActionPerformed
+
+    private void dateTimeArrangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateTimeArrangeBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateTimeArrangeBtnActionPerformed
 
     /**
      * @param args the command line arguments

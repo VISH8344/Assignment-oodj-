@@ -114,7 +114,7 @@ public class Setup_Data {
     
      public void TempApplicationData() {
         application = new Application(1, student, room, LocalDateTime.now(), payment, ApplicationStatus.PENDING,"");
-        application2 = new Application(2, student, room, LocalDateTime.now(), payment, ApplicationStatus.REJECTED,"");
+        application2 = new Application(2, student, room2, LocalDateTime.now(), payment, ApplicationStatus.REJECTED,"");
         applications.add(application);
         applications.add(application2);
         applications.forEach(a -> ApplicationController.ActivateApplicationController().add(a));
