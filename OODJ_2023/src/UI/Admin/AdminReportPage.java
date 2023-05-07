@@ -155,12 +155,15 @@ public class AdminReportPage extends javax.swing.JFrame {
     private void salesReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesReportActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        
+        ReportSales rs = new ReportSales();
+        rs.setVisible(true);
     }//GEN-LAST:event_salesReportActionPerformed
 
     private void roomReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomReportActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        ReportRoom rr = new ReportRoom();
+        rr.setVisible(true);
     }//GEN-LAST:event_roomReportActionPerformed
 
     /**

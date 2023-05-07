@@ -61,10 +61,32 @@
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="backBtn" min="-2" pref="86" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel1" pref="616" max="32767" attributes="0"/>
+                  <Component id="jLabel1" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="logoutBtn" min="-2" pref="86" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="troom" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="sroom" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                      <Component id="troom1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                      <Component id="troom2" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="numPTR" min="-2" pref="155" max="-2" attributes="0"/>
+                      <Component id="numPSR" min="-2" pref="155" max="-2" attributes="0"/>
+                      <Component id="numTR" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          <Component id="numOfRoom" min="-2" pref="155" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="numSR" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="242" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -77,7 +99,32 @@
                       <Component id="jLabel1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="logoutBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="522" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="numOfRoom" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="sroom" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="numSR" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="troom" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="numTR" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="troom1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="numPSR" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="troom2" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="numPTR" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -120,11 +167,76 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Room report"/>
+            <Property name="text" type="java.lang.String" value="Room report (available room)"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Total Room Available :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="numOfRoom">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="{num of room}"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="sroom">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Number of Single Room"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="numSR">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="{num of room}"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="troom">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Number of Twin Room"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="numTR">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="{num of room}"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="troom1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Number of Premium Single Room"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="numPSR">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="{num of room}"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="troom2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Number of Premium Twin Room"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="numPTR">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="{num of room}"/>
           </Properties>
         </Component>
       </SubComponents>

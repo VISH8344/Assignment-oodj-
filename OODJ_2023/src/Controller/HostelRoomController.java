@@ -190,7 +190,7 @@ public class HostelRoomController implements Controller {
         ArrayList<HostelRoom> response = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).isAvailable()) {
-                response.add((PremiumTwinRoom) rooms.get(i));
+                response.add(rooms.get(i));
             }
         }
         if (response == null) {
@@ -199,11 +199,12 @@ public class HostelRoomController implements Controller {
         return response;
     }
 
-    public ArrayList<?> getAvailableRoomsByClassType(Class<?> classType) {
+    public ArrayList<?> getAvailableRoomsByClassType(String classType) {
         ArrayList<HostelRoom> availableRooms = getAvailableRooms();
         ArrayList<HostelRoom> responseRooms = new ArrayList<>();
         for (int i = 0; i < availableRooms.size(); i++) {
-            if (availableRooms.get(i).getClass() == classType) {
+            if (availableRooms.get(i).getClass().getSimpleName().equals(classType)) {
+                System.out.println("same");
                 responseRooms.add(availableRooms.get(i));
             }
         }

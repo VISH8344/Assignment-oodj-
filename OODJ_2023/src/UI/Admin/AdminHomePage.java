@@ -245,6 +245,9 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void ReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        AdminReportPage arp = new AdminReportPage();
+        arp.setVisible(true);
     }//GEN-LAST:event_ReportActionPerformed
 
     /**
