@@ -18,7 +18,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author mingl
  */
 public class AdminRoomManagementForm extends javax.swing.JFrame {
 

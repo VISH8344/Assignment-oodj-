@@ -112,6 +112,20 @@ public class StudentController implements Controller {
         }
         return response;
     }
+    
+     public ArrayList<Student> getStudentsByStudentName(String text){
+        text = text.toLowerCase();
+        ArrayList<Student> response = new ArrayList<>();
+        for (int i = 0; i < students.size(); i++) {
+            if(students.get(i).getName().toLowerCase().contains(text)){
+                response.add(students.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("There is no students with this student name in the record.");
+        }
+        return response;
+    }
 
     public void add(Student student) {
         this.students.add(student);

@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author mingl
  */
 public class AdminApplicationManagementForm extends javax.swing.JFrame {
 

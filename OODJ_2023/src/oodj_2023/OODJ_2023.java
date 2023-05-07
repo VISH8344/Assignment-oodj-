@@ -18,7 +18,7 @@ public class OODJ_2023 {
     public static LoginPage lp;
     public static WelcomePage wp = new WelcomePage();
 //    public static RegisterPage rp = new RegisterPage();
-
+  
     private void initialize() {
         Setup_Data.InitializeData();
         wp.setVisible(true);

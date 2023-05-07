@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author mingl
  */
 public class Setup_Data {
     private ArrayList<Facility> facilities = new ArrayList<>();
@@ -53,6 +52,7 @@ public class Setup_Data {
     private Application application;
     private Application application2;
     private Reservation reservation;
+    private Reservation reservation2;
     private Payment payment;
     private Payment payment2;
     private Payment payment3;
@@ -107,7 +107,7 @@ public class Setup_Data {
          rooms.add(room14);
          rooms.add(room15);
          rooms.forEach(room -> {
-             System.out.println("room: " + room.toString());
+             System.out.println("loading room: " + room.toString());
          });
          rooms.forEach(r -> HostelRoomController.ActivateHostelRoomController().add(r));
     }

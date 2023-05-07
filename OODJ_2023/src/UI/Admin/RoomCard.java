@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author mingl
  */
 public class RoomCard extends javax.swing.JPanel {
 

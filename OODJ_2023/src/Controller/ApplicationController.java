@@ -105,15 +105,14 @@ public class ApplicationController implements Controller {
         return response;
     }
 
-    public Application getApplicationByStudentID(int stuID) {
-        Application response = null;
+    public ArrayList<Application> getApplicationSByStudentID(int stuID) {
+        ArrayList<Application> response = new ArrayList<>();
         for (int i = 0; i < applications.size(); i++) {
             if (applications.get(i).getStudent().getStudentID() == stuID) {
-                response = applications.get(i);
-                break;
+                response.add(applications.get(i));
             }
         }
-        if (response == null) {
+        if (response.size() == 0) {
             System.out.println("Application with this student id : " + stuID + " is not found");
         }
         return response;
@@ -154,6 +153,20 @@ public class ApplicationController implements Controller {
         }
         if (response == null) {
             System.out.println("There is no rejected applications in the record.");
+        }
+        return response;
+    }
+    
+    public ArrayList<Application> getApplicationsByStudentName(String text){
+        text = text.toLowerCase();
+        ArrayList<Application> response = new ArrayList<>();
+        for (int i = 0; i < applications.size(); i++) {
+            if(applications.get(i).getStudent().getName().toLowerCase().contains(text)){
+                response.add(applications.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("There is no applications with this student name in the record.");
         }
         return response;
     }

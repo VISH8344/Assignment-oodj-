@@ -10,6 +10,7 @@ import Model.Enum.ApplicationStatus;
 import UI.WelcomePage;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -38,7 +39,6 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
 
         // get data and generate card component
         resetApplications();
-        generateApplicationCard();
 
         // set initial data
         typeTitleLabel.setText("ALL");
@@ -70,6 +70,13 @@ public class AdminApplicationManagement extends javax.swing.JFrame {
                 default -> {
                 }
             }
+        }
+         if (this.applications.size() == 0) {
+            JPanel jp = new JPanel();
+            jp.add(new JLabel("No record"));
+            jp.setPreferredSize(new Dimension(843, 150));
+            applicationCardScrollPane.getViewport().add(jp);
+            return;
         }
         generateApplicationCard();
     }

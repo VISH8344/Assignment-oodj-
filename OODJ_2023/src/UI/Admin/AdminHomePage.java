@@ -239,6 +239,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void RecordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordBtnActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        AdminRecordPage.getInstance().setVisible(true);
     }//GEN-LAST:event_RecordBtnActionPerformed
 
     private void ReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportActionPerformed

@@ -15,6 +15,7 @@ import Model.HostelSubClass.TwinRoom;
 import UI.WelcomePage;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -78,6 +79,13 @@ public class AdminRoomManagement extends javax.swing.JFrame {
                 default:
                     break;
             }
+        }
+        if (this.rooms.size() == 0) {
+            JPanel jp = new JPanel();
+            jp.add(new JLabel("No record"));
+            jp.setPreferredSize(new Dimension(843, 150));
+            roomCardsPanel.getViewport().add(jp);
+            return;
         }
         generateRoomCard();
     }

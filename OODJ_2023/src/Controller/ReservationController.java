@@ -44,9 +44,9 @@ public class ReservationController implements Controller {
             fileContents.add(
                     re.getReservationID() + ";"
                     + re.getCheckInDateTime() + ";"
-                    + re.getCheckOutDateTime()
-                    + ";" + re.getcontractPeriodWeeks()
-                    + ";" + re.getApplication().getApplicationID());
+                    + re.getCheckOutDateTime() + ";"
+                    + re.getcontractPeriodWeeks() + ";"
+                    + re.getApplication().getApplicationID());
         });
         return fileContents;
     }
@@ -96,16 +96,29 @@ public class ReservationController implements Controller {
         return response;
     }
 
-    public Reservation getReservationByStudentID(int studentID) {
-        Reservation response = null;
-        for (int i = 0; i < reservations.size(); i++) {
+    public ArrayList<Reservation> getReservationsByStudentID(int studentID) {
+        ArrayList<Reservation> response = new ArrayList<>();
+        for (int i = 0; i< reservations.size(); i++) {
             if (reservations.get(i).getApplication().getStudent().getStudentID() == studentID) {
-                response = reservations.get(i);
-                break;
+                response.add(reservations.get(i));
+            }
+        }
+        if (response.size() == 0) {
+            System.out.println("Reservation with this student id : " + studentID + " is not found");
+        }
+        return response;
+    }
+    
+    public ArrayList<Reservation> getReservationsByStudentName(String text){
+        text = text.toLowerCase();
+        ArrayList<Reservation> response = new ArrayList<>();
+        for (int i = 0; i < reservations.size(); i++) {
+            if(reservations.get(i).getApplication().getStudent().getName().toLowerCase().contains(text)){
+                response.add(reservations.get(i));
             }
         }
         if (response == null) {
-            System.out.println("Reservation with this studentID : " + studentID + " is not found");
+            System.out.println("There is no reservations with this student name in the record.");
         }
         return response;
     }

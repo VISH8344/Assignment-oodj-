@@ -22,7 +22,7 @@ public class Reservation{
         this.application = application;
         this.checkInDateTime = checkInDateTime;
         this.checkOutDateTime = checkOutDateTime;
-        this.contractPeriodWeeks = contractPeriodWeeks;
+        this.contractPeriodWeeks = contractPeriod;
     }
 
     public int getReservationID() {
