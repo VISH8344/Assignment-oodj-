@@ -88,7 +88,7 @@ public class PaymentController implements Controller {
     }
 
     public ArrayList<Payment> getValidPayments() {
-        ArrayList<Payment> response = null;
+        ArrayList<Payment> response = new ArrayList<>();
         for (int i = 0; i < payments.size(); i++) {
             if (!payments.get(i).isRefunded()) {
                 response.add(payments.get(i));
@@ -96,6 +96,48 @@ public class PaymentController implements Controller {
         }
         if (response == null) {
             System.out.println("No valid payment");
+        }
+        return response;
+    }
+    
+    public ArrayList<Payment> getAnnualPayments(){
+        ArrayList<Payment> validpayment = getValidPayments();
+        ArrayList<Payment> response = new ArrayList<>();
+        for(int i = 0; i < validpayment.size();i++){
+            if(payments.get(i).getDateTime().getYear() == 2023){
+                response.add(payments.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("No valid payment in 2023");
+        }
+        return response;
+    }
+    
+    public ArrayList<Payment> getMonthlyPayments(int x){
+        ArrayList<Payment> validpayment = getValidPayments();
+        ArrayList<Payment> response = new ArrayList<>();
+        for(int i = 0; i < validpayment.size();i++){
+            if(payments.get(i).getDateTime().getMonthValue() == x){
+                response.add(payments.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("No valid payment in 2023");
+        }
+        return response;
+    }
+    
+    public ArrayList<Payment> getDailyPayments(int x, int y){
+        ArrayList<Payment> validpayment = getMonthlyPayments(x);
+        ArrayList<Payment> response = new ArrayList<>();
+        for(int i = 0; i < validpayment.size();i++){
+            if(payments.get(i).getDateTime().getDayOfMonth()== y){
+                response.add(payments.get(i));
+            }
+        }
+        if (response == null) {
+            System.out.println("No valid payment in 2023");
         }
         return response;
     }
